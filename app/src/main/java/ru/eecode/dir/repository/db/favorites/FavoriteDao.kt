@@ -1,7 +1,9 @@
 package ru.eecode.dir.repository.db.favorites
 
+import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.*
+import ru.eecode.dir.repository.db.articles.Article
 import ru.eecode.dir.repository.db.articles.ArticleListItem
 
 @Dao
@@ -20,6 +22,6 @@ interface FavoriteDao {
     @Delete
     suspend fun deleteFavorite(favorite: Favorite)
 
-//    @Query("INSERT INTO favorites VALUES (:articleId)")
-//    suspend fun insertById(articleId: Int)
+    @Query("SELECT * FROM favorites WHERE article_id = :id")
+    fun getById(id: Int): LiveData<Favorite>
 }

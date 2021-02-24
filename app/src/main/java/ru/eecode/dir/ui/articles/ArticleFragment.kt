@@ -2,11 +2,10 @@ package ru.eecode.dir.ui.articles
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eecode.dir.R
 import ru.eecode.dir.databinding.FragmentArticleBinding
@@ -23,6 +22,7 @@ class ArticleFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val rootView = inflater.inflate(R.layout.fragment_article, container, false)
+        setHasOptionsMenu(true)
         return rootView
     }
 
@@ -40,5 +40,25 @@ class ArticleFragment: Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.article, menu)
+
+        val favoritesItem = menu.findItem(R.id.action_add_to_favorites)
+
+        viewModel.isFavorite.observe(viewLifecycleOwner, {
+            favoritesItem.isChecked = it != null
+        })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_add_to_favorites -> {
+                viewModel.toggleFavorites()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

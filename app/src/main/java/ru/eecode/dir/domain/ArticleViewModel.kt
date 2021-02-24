@@ -1,10 +1,12 @@
 package ru.eecode.dir.domain
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import ru.eecode.dir.repository.ArticleRepository
 import ru.eecode.dir.repository.db.articles.Article
+import ru.eecode.dir.repository.db.favorites.Favorite
 
 class ArticleViewModel  @ViewModelInject constructor(
     private val articleRepository: ArticleRepository
@@ -14,11 +16,12 @@ class ArticleViewModel  @ViewModelInject constructor(
 
     var article: MutableLiveData<Article?> = MutableLiveData(null)
 
-    init {
-        loadArticle()
+    lateinit var isFavorite: LiveData<Favorite>
 
+    init {
         articleId.observeForever {
             loadArticle()
+            checkIsFavorite()
         }
     }
 
@@ -28,6 +31,33 @@ class ArticleViewModel  @ViewModelInject constructor(
             if (id != null) {
                 article.value = articleRepository.findArticleById(id)
             }
+        }
+    }
+
+    private fun checkIsFavorite() {
+
+        if (articleId.value != null) {
+            isFavorite = articleRepository.isFavorite(articleId.value!!)
+        }
+    }
+
+    fun toggleFavorites() {
+        if (isFavorite.value != null) {
+            removeFromFavorites()
+        } else {
+            addToFavorites()
+        }
+    }
+
+    private fun addToFavorites() {
+        viewModelScope.launch {
+            articleRepository.addToFavorites(articleId.value!!)
+        }
+    }
+
+    private fun removeFromFavorites() {
+        viewModelScope.launch {
+            articleRepository.removeFromFavorites(articleId.value!!)
         }
     }
 }

@@ -6,20 +6,57 @@
         <variable name="viewmodel" type="ru.eecode.dir.domain.ArticleViewModel" />
     </data>
 
+    <ScrollView android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/contentStart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintGuide_begin="16dp"
+            android:orientation="vertical"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/contentEnd"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintGuide_end="16dp"
+            android:orientation="vertical"
+            />
+
+        <TextView
+            android:id="@+id/articleTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewmodel.article.title}"
+            android:fontFamily="@font/roboto_slab_bold"
+            app:layout_constraintEnd_toEndOf="@id/contentEnd"
+            app:layout_constraintStart_toStartOf="@id/contentStart"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constrainedWidth="true"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            />
 
         <TextView
             android:id="@+id/articleContent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@{viewmodel.article.body}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
+            app:layout_constraintEnd_toEndOf="@id/contentEnd"
+            app:layout_constraintStart_toStartOf="@id/contentStart"
+            app:layout_constraintTop_toBottomOf="@+id/articleTitle"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constrainedWidth="true"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

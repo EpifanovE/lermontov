@@ -4,6 +4,7 @@ package ru.eecode.dir.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -14,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.NavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eecode.dir.R
 
@@ -21,6 +23,8 @@ import ru.eecode.dir.R
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
-        val navController = findNavController(R.id.nav_host_fragment)
+        navController = findNavController(R.id.nav_host_fragment)
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -43,13 +47,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        getMenuInflater().inflate(R.menu.main, menu);
-
+        menuInflater.inflate(R.menu.main, menu);
+        val settingsItem: MenuItem = menu.findItem(R.id.action_settings)
+        settingsItem.isVisible = navController.currentDestination?.id != R.id.nav_settings
         return true;
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_settings -> {
+                navController.navigate(R.id.nav_settings)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

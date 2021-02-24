@@ -1,6 +1,7 @@
 package ru.eecode.dir.repository
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.paging.toLiveData
 import com.google.gson.Gson
@@ -60,5 +61,9 @@ class ArticleRepository @Inject constructor(
 
     suspend fun removeFromFavorites(id: Int) {
         favoriteDao.deleteFavorite(Favorite(id));
+    }
+
+    fun isFavorite(id: Int) : LiveData<Favorite> {
+        return favoriteDao.getById(id)
     }
 }

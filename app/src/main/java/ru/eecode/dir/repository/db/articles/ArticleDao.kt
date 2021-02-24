@@ -40,7 +40,7 @@ interface ArticleDao {
     @Query("SELECT * FROM articles WHERE id IN (:articlesIds)")
     fun loadAllByIds(articlesIds: IntArray): List<Article>
 
-    @Query("SELECT * FROM articles WHERE id LIKE :id LIMIT 1")
+    @Query("SELECT * FROM articles WHERE id = :id LIMIT 1")
     suspend fun findById(id: Int): Article
 
     @Delete
