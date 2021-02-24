@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fontSizeLabels">
+        <item>@string/fontSizeSmall</item>
+        <item>@string/fontSizeMedium</item>
+        <item>@string/fontSizeLarge</item>
+    </string-array>
+
+    <string-array name="fontSizeValues">
+        <item>sm</item>
+        <item>md</item>
+        <item>lg</item>
+    </string-array>
+</resources>

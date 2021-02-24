@@ -13,7 +13,7 @@
 
         <action
             android:id="@+id/action_nav_articles_to_articleFragment"
-            app:destination="@id/articleFragment" />
+            app:destination="@id/nav_article" />
     </fragment>
 
     <fragment
@@ -23,11 +23,11 @@
         tools:layout="@layout/fragment_favorites" >
         <action
             android:id="@+id/action_nav_favorites_to_articleFragment"
-            app:destination="@id/articleFragment" />
+            app:destination="@id/nav_article" />
     </fragment>
 
     <fragment
-        android:id="@+id/articleFragment"
+        android:id="@+id/nav_article"
         android:name="ru.eecode.dir.ui.articles.ArticleFragment"
         android:label="ArticleFragment" >
         <argument
@@ -35,5 +35,10 @@
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="ru.eecode.dir.ui.prefs.SettingsFragment"
+        android:label="@string/settings" />
 
 </navigation>
