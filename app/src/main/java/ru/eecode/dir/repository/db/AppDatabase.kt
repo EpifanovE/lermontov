@@ -7,10 +7,14 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import ru.eecode.dir.repository.db.articles.*
+import ru.eecode.dir.repository.db.favorites.Favorite
+import ru.eecode.dir.repository.db.favorites.FavoriteDao
 
-@Database(entities = [Article::class, ArticleFts::class], version = 1)
+@Database(entities = [Article::class, ArticleFts::class, Favorite::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun articleDao(): ArticleDao
+
+    abstract fun favoriteDao(): FavoriteDao
 
     companion object {
 

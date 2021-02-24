@@ -8,5 +8,7 @@ import androidx.room.PrimaryKey
 data class ArticleListItem (
     @PrimaryKey(autoGenerate = true) @ColumnInfo( name = "id") val id: Int,
     @ColumnInfo( name = "title") val title: String,
-    @ColumnInfo( name = "description") val description: String?
+    @ColumnInfo( name = "description") val description: String?,
+    @ColumnInfo( name = "rank") val rank: Int,
+    @ColumnInfo( name = "is_favorite") val isFavorite: Boolean
 )

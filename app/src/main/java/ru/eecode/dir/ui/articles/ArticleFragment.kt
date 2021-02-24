@@ -11,11 +11,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.eecode.dir.R
 import ru.eecode.dir.databinding.FragmentArticleBinding
 import ru.eecode.dir.domain.ArticleIndexViewModel
+import ru.eecode.dir.domain.ArticleViewModel
 
 @AndroidEntryPoint
 class ArticleFragment: Fragment() {
 
-    private val viewModel: ArticleIndexViewModel by activityViewModels()
+    private val viewModel: ArticleViewModel by activityViewModels()
 
     private var binding: FragmentArticleBinding? = null
 
@@ -31,6 +32,8 @@ class ArticleFragment: Fragment() {
         binding = FragmentArticleBinding.bind(view)
         binding!!.lifecycleOwner = viewLifecycleOwner
         binding!!.viewmodel = viewModel
+
+        viewModel.articleId.value = arguments?.getInt("articleId")
 
     }
 

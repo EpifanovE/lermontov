@@ -9,6 +9,7 @@ import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import ru.eecode.dir.R
 import ru.eecode.dir.repository.db.articles.ArticleListItem
 import javax.inject.Inject
@@ -20,12 +21,23 @@ class ArticleAdapter @Inject constructor() :
 
     var onDataChangedListener: OnDataChangedListener? = null
 
+    var onFavoriteClickListener: OnFavoriteClickListener? = null
+
+    /**
+     * To prevent scroll a recycler view to 0 position, when an item added/removed from favorites
+     */
+    var favoriteButtonPressed: Boolean = false
+
     interface OnItemClickListener {
         fun onItemClick(item: ArticleListItem)
     }
 
     interface OnDataChangedListener {
         fun onDataChanged()
+    }
+
+    interface OnFavoriteClickListener {
+        fun onClick(articleId: Int, isFavorite: Boolean)
     }
 
     override fun onBindViewHolder(holder: ArticleHolder, position: Int) {
@@ -45,7 +57,11 @@ class ArticleAdapter @Inject constructor() :
         currentList: PagedList<ArticleListItem>?
     ) {
         super.onCurrentListChanged(previousList, currentList)
-        onDataChangedListener?.onDataChanged()
+
+        if (!favoriteButtonPressed) {
+            onDataChangedListener?.onDataChanged()
+        }
+        favoriteButtonPressed = false
     }
 
     companion object {
@@ -63,6 +79,7 @@ class ArticleAdapter @Inject constructor() :
 
         var textViewTitle: TextView = itemView.findViewById(R.id.articleTitle)
         var textViewDescription: TextView = itemView.findViewById(R.id.articleDescription)
+        var favoriteIcon: MaterialButton = itemView.findViewById(R.id.favoriteIcon);
         var article: ArticleListItem? = null
 
         fun bindTo(article: ArticleListItem?) {
@@ -74,6 +91,19 @@ class ArticleAdapter @Inject constructor() :
             } else {
                 textViewDescription.visibility = View.VISIBLE
                 textViewDescription.text = HtmlCompat.fromHtml(article.description, HtmlCompat.FROM_HTML_MODE_COMPACT)
+            }
+
+            if (article != null && article.isFavorite) {
+                favoriteIcon.setIconTintResource(R.color.favoriteButtonActive)
+            } else {
+                favoriteIcon.setIconTintResource(R.color.favoriteButtonNonActive)
+            }
+
+            if (article != null) {
+                favoriteIcon.setOnClickListener {
+                    onFavoriteClickListener?.onClick(article.id, article.isFavorite)
+                    favoriteButtonPressed = true
+                }
             }
         }
     }

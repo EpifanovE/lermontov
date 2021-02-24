@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="viewmodel" type="ru.eecode.dir.domain.ArticleIndexViewModel" />
+        <variable name="viewmodel" type="ru.eecode.dir.domain.ArticleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/articleContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@{viewmodel.article.body}"

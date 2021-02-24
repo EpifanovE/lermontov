@@ -1,22 +1,26 @@
 package ru.eecode.dir.repository
 
+import android.util.Log
 import androidx.paging.DataSource
+import androidx.paging.toLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import ru.eecode.dir.repository.db.articles.Article
 import ru.eecode.dir.repository.db.articles.ArticleDao
 import ru.eecode.dir.repository.db.articles.ArticleListItem
+import ru.eecode.dir.repository.db.favorites.Favorite
+import ru.eecode.dir.repository.db.favorites.FavoriteDao
 import ru.eecode.dir.utils.JsonAssetsLoader
 import javax.inject.Inject
 
 class ArticleRepository @Inject constructor(
     private val articleDao: ArticleDao,
+    private val favoriteDao: FavoriteDao,
     private val jsonAssetsLoader: JsonAssetsLoader
 ) {
-
     fun loadArticles(searchFilter: String?): DataSource.Factory<Int, ArticleListItem> {
         if (searchFilter != null && searchFilter.isNotEmpty()) {
-            return articleDao.search(searchFilter)
+            return articleDao.search(sanitizeSearchQuery(searchFilter))
         }
         return articleDao.getAll()
     }
@@ -36,5 +40,25 @@ class ArticleRepository @Inject constructor(
 
     suspend fun findArticleById(id: Int): Article {
         return articleDao.findById(id)
+    }
+
+    private fun sanitizeSearchQuery(query: String?): String {
+        if (query == null) {
+            return "";
+        }
+        val queryWithEscapedQuotes = query.replace(Regex.fromLiteral("\""), "\"\"")
+        return "#\"$queryWithEscapedQuotes*\"#"
+    }
+
+    fun loadFavorites(): DataSource.Factory<Int, ArticleListItem> {
+        return favoriteDao.getAll()
+    }
+
+    suspend fun addToFavorites(id: Int) {
+        favoriteDao.addFavorite(Favorite(id))
+    }
+
+    suspend fun removeFromFavorites(id: Int) {
+        favoriteDao.deleteFavorite(Favorite(id));
     }
 }

@@ -12,4 +12,6 @@
     <color name="primaryVariant">#192a56</color>
     <color name="backgroundWhite">#f5f6fa</color>
     <color name="onBackgroundWhite">#2f3640</color>
+    <color name="favoriteButtonActive">#f39c12</color>
+    <color name="favoriteButtonNonActive">#bbbbbb</color>
 </resources>

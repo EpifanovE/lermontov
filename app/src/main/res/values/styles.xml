@@ -14,4 +14,15 @@
         <item name="android:padding">10dp</item>
         <item name="elevation">5dp</item>
     </style>
+
+    <style name="favoriteButtonActive" parent="@style/Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="android:textColor">@color/favoriteButtonActive</item>
+        <item name="iconTint">@color/favoriteButtonActive</item>
+        <item name="rippleColor">#ffffffff</item>
+    </style>
+
+    <style name="favoriteButtonNonActive" parent="favoriteButtonActive">
+        <item name="android:textColor">@color/favoriteButtonNonActive</item>
+        <item name="iconTint">@color/favoriteButtonNonActive</item>
+    </style>
 </resources>

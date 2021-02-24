@@ -11,6 +11,7 @@ import ru.eecode.dir.repository.db.articles.ArticleDao
 import ru.eecode.dir.repository.db.AppDatabase
 import ru.eecode.dir.repository.db.DbCallback
 import ru.eecode.dir.repository.db.articles.ArticlesSeeder
+import ru.eecode.dir.repository.db.favorites.FavoriteDao
 import ru.eecode.dir.utils.JsonAssetsLoader
 import javax.inject.Singleton
 
@@ -37,6 +38,10 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideArticleRepository(articleDao: ArticleDao, jsonAssetsLoader: JsonAssetsLoader) = ArticleRepository(articleDao, jsonAssetsLoader)
+    fun provideFavoriteDao(db: AppDatabase) = db.favoriteDao()
+
+    @Singleton
+    @Provides
+    fun provideArticleRepository(articleDao: ArticleDao, favoriteDao: FavoriteDao, jsonAssetsLoader: JsonAssetsLoader) = ArticleRepository(articleDao, favoriteDao, jsonAssetsLoader)
 
 }

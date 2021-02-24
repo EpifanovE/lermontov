@@ -1,10 +1,8 @@
 package ru.eecode.dir.ui
 
-import android.app.SearchManager
-import android.content.Context
-import android.content.Intent
+
 import android.os.Bundle
-import android.provider.SearchRecentSuggestions
+import android.util.Log
 import android.view.Menu
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -14,13 +12,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.SearchView.OnQueryTextListener;
-import androidx.appcompat.widget.SearchView
 
 import androidx.appcompat.widget.Toolbar
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eecode.dir.R
-import ru.eecode.dir.utils.hideKeyboard
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -39,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_articles, R.id.nav_favorites
+                R.id.nav_articles
             ), drawerLayout
         )
 
