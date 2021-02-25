@@ -36,4 +36,10 @@ class FavoritesViewModel  @ViewModelInject constructor(
             articleRepository.removeFromFavorites(id)
         }
     }
+
+    fun clearFavorites() {
+        viewModelScope.launch {
+            articleRepository.clearFavorites()
+        }
+    }
 }

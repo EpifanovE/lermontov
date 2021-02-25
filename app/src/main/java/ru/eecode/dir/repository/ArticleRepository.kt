@@ -66,4 +66,8 @@ class ArticleRepository @Inject constructor(
     fun isFavorite(id: Int) : LiveData<Favorite> {
         return favoriteDao.getById(id)
     }
+
+    suspend fun clearFavorites() {
+        favoriteDao.deleteAll()
+    }
 }

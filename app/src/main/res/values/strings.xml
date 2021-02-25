@@ -14,6 +14,7 @@
 
     <string name="action_settings">@string/settings</string>
     <string name="action_add_to_favorites">В избранное</string>
+    <string name="action_clear_favorites">Очистить избранное</string>
 
     <string name="search_placeholder">Поиск…</string>
 
@@ -23,5 +24,11 @@
     <string name="fontSizeSmall">Маленький</string>
     <string name="fontSizeMedium">Средний</string>
     <string name="fontSizeLarge">Большой</string>
+
+    <string name="clear_favorites_dialog_title">Очистить избранное</string>
+    <string name="clear_favorites_dialog_message">Вы уверены, что хотите удалить все из избранного?</string>
+
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 
 </resources>

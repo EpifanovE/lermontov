@@ -24,4 +24,7 @@ interface FavoriteDao {
 
     @Query("SELECT * FROM favorites WHERE article_id = :id")
     fun getById(id: Int): LiveData<Favorite>
+
+    @Query("DELETE FROM favorites")
+    suspend fun deleteAll()
 }

@@ -1,10 +1,10 @@
 package ru.eecode.dir.ui.favorites
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -75,5 +75,39 @@ class FavoritesFragment : Fragment() {
         viewModel.favorites.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.favorites, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_clear_favorites -> {
+                confirmDialog()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun confirmDialog() {
+        val builder: AlertDialog.Builder? = activity?.let {
+            AlertDialog.Builder(it)
+        }
+
+        builder?.apply {
+            setPositiveButton(R.string.yes) { _, _ ->
+                viewModel.clearFavorites()
+            }
+            setNegativeButton(R.string.no) { dialog, _ ->
+                dialog.cancel()
+            }
+            setMessage(R.string.clear_favorites_dialog_message)
+                ?.setTitle(R.string.clear_favorites_dialog_title)
+        }
+
+        val dialog: AlertDialog? = builder?.create()
+        dialog?.show()
     }
 }
