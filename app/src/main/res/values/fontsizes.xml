@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="fontSizeLabels">
-        <item>@string/fontSizeSmall</item>
-        <item>@string/fontSizeMedium</item>
-        <item>@string/fontSizeLarge</item>
+    <string-array name="font_size_labels">
+        <item>@string/font_size_small</item>
+        <item>@string/font_size_medium</item>
+        <item>@string/font_size_large</item>
     </string-array>
 
-    <string-array name="fontSizeValues">
-        <item>sm</item>
-        <item>md</item>
-        <item>lg</item>
+
+    <string-array name="font_size_values">
+        <item>16</item>
+        <item>18</item>
+        <item>22</item>
     </string-array>
 </resources>

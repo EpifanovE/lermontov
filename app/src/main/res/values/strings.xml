@@ -20,10 +20,10 @@
 
     <string name="generalSettings">Основные</string>
 
-    <string name="fontSize">Размер шрифта</string>
-    <string name="fontSizeSmall">Маленький</string>
-    <string name="fontSizeMedium">Средний</string>
-    <string name="fontSizeLarge">Большой</string>
+    <string name="font_size">Размер шрифта</string>
+    <string name="font_size_small">Маленький</string>
+    <string name="font_size_medium">Средний</string>
+    <string name="font_size_large">Большой</string>
 
     <string name="clear_favorites_dialog_title">Очистить избранное</string>
     <string name="clear_favorites_dialog_message">Вы уверены, что хотите удалить все из избранного?</string>

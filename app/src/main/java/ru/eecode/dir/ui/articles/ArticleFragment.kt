@@ -5,11 +5,10 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eecode.dir.R
 import ru.eecode.dir.databinding.FragmentArticleBinding
-import ru.eecode.dir.domain.ArticleIndexViewModel
 import ru.eecode.dir.domain.ArticleViewModel
 
 @AndroidEntryPoint
@@ -23,6 +22,8 @@ class ArticleFragment: Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val rootView = inflater.inflate(R.layout.fragment_article, container, false)
         setHasOptionsMenu(true)
+
+
         return rootView
     }
 
@@ -32,6 +33,9 @@ class ArticleFragment: Fragment() {
         binding = FragmentArticleBinding.bind(view)
         binding!!.lifecycleOwner = viewLifecycleOwner
         binding!!.viewmodel = viewModel
+
+        binding!!.articleContent.textSize = getTextSize() ?: 18f
+        binding!!.articleTitle.textSize = getTextSize() ?: 18f
 
         viewModel.articleId.value = arguments?.getInt("articleId")
 
@@ -60,5 +64,10 @@ class ArticleFragment: Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun getTextSize(): Float? {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        return prefs.getString("font_size", "18")?.toFloat()
     }
 }

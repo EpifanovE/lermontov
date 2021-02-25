@@ -3,11 +3,11 @@
     <PreferenceCategory app:title="@string/generalSettings">
 
         <ListPreference
-            app:defaultValue="md"
-            app:entries="@array/fontSizeLabels"
-            app:entryValues="@array/fontSizeValues"
-            app:key="fontSize"
-            app:title="@string/fontSize"
+            app:defaultValue="18"
+            app:entries="@array/font_size_labels"
+            app:entryValues="@array/font_size_values"
+            app:key="font_size"
+            app:title="@string/font_size"
             app:useSimpleSummaryProvider="true"/>
 
     </PreferenceCategory>
