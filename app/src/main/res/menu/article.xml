@@ -8,5 +8,5 @@
         android:title="@string/action_add_to_favorites"
         android:icon="@drawable/ic_baseline_favorite_24"
         android:checkable="true"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 </menu>

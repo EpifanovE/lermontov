@@ -1,7 +1,14 @@
 package ru.eecode.lermontov.ui.articles
 
+import android.graphics.BlendModeColorFilter
+import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.*
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.preference.PreferenceManager
@@ -11,7 +18,7 @@ import ru.eecode.lermontov.databinding.FragmentArticleBinding
 import ru.eecode.lermontov.domain.ArticleViewModel
 
 @AndroidEntryPoint
-class ArticleFragment: Fragment() {
+class ArticleFragment : Fragment() {
 
     private val viewModel: ArticleViewModel by activityViewModels()
 
@@ -50,8 +57,19 @@ class ArticleFragment: Fragment() {
 
         val favoritesItem = menu.findItem(R.id.action_add_to_favorites)
 
+
         viewModel.isFavorite.observe(viewLifecycleOwner, {
             favoritesItem.isChecked = it != null
+            val favoriteIcon = favoritesItem.icon
+
+            if (it != null) {
+                favoriteIcon.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                    ContextCompat.getColor(requireContext(), R.color.favoriteButtonActive), BlendModeCompat.SRC_ATOP
+                )
+                favoritesItem.icon = favoriteIcon
+            } else {
+                favoriteIcon.colorFilter = null
+            }
         })
     }
 

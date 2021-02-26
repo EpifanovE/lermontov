@@ -21,9 +21,9 @@ import ru.eecode.lermontov.R
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
+    private var appBarConfiguration: AppBarConfiguration? = null
 
-    private lateinit var navController: NavController
+    private var navController: NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,26 +41,32 @@ class MainActivity : AppCompatActivity() {
             ), drawerLayout
         )
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        setupActionBarWithNavController(navController!!, appBarConfiguration!!)
+        navView.setupWithNavController(navController!!)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu);
         val settingsItem: MenuItem = menu.findItem(R.id.action_settings)
-        settingsItem.isVisible = navController.currentDestination?.id != R.id.nav_settings
+        settingsItem.isVisible = navController!!.currentDestination?.id != R.id.nav_settings
         return true;
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+        return navController.navigateUp(appBarConfiguration!!) || super.onSupportNavigateUp()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        appBarConfiguration = null
+        navController = null
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_settings -> {
-                navController.navigate(R.id.nav_settings)
+                navController!!.navigate(R.id.nav_settings)
                 true
             }
             else -> super.onOptionsItemSelected(item)

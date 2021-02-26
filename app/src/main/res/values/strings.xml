@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dir</string>
+    <string name="app_name">М.Ю.Лермонтов - Сборник стихов</string>
 
     <string name="nav_header_title">@string/app_name</string>
     <string name="nav_header_subtitle">eevcode@gmail.com</string>

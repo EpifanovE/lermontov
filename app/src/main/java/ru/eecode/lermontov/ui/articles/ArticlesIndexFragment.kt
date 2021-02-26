@@ -24,7 +24,7 @@ import ru.eecode.lermontov.utils.hideKeyboard
 @AndroidEntryPoint
 class ArticlesIndexFragment : Fragment() {
 
-    private val adapter: ArticleAdapter = ArticleAdapter()
+    private var adapter: ArticleAdapter? = ArticleAdapter()
 
     private val viewModel: ArticleIndexViewModel by activityViewModels()
 
@@ -45,7 +45,7 @@ class ArticlesIndexFragment : Fragment() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        adapter?.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
         val rootView = inflater.inflate(R.layout.fragment_articles_index, container, false)
         setHasOptionsMenu(true)
@@ -77,14 +77,14 @@ class ArticlesIndexFragment : Fragment() {
 
         setSearchInput()
 
-        adapter.onItemClickListener = object : ArticleAdapter.OnItemClickListener {
+        adapter?.onItemClickListener = object : ArticleAdapter.OnItemClickListener {
             override fun onItemClick(item: ArticleListItem) {
                 val bundle = bundleOf("articleId" to item.id)
                 Navigation.findNavController(view).navigate(R.id.action_nav_articles_to_articleFragment, bundle)
             }
         }
 
-        adapter.onDataChangedListener = object : ArticleAdapter.OnDataChangedListener {
+        adapter?.onDataChangedListener = object : ArticleAdapter.OnDataChangedListener {
             override fun onDataChanged() {
                 if (viewModel.destroyed.value != true) {
                     binding!!.articlesIndex.layoutManager!!.scrollToPosition(0)
@@ -92,7 +92,7 @@ class ArticlesIndexFragment : Fragment() {
             }
         }
 
-        adapter.onFavoriteClickListener = object : ArticleAdapter.OnFavoriteClickListener {
+        adapter?.onFavoriteClickListener = object : ArticleAdapter.OnFavoriteClickListener {
             override fun onClick(articleId: Int, isFavorite: Boolean) {
                 if (isFavorite) {
                     viewModel.removeFromFavorites(articleId)
@@ -103,7 +103,7 @@ class ArticlesIndexFragment : Fragment() {
         }
 
         viewModel.articles.observe(viewLifecycleOwner, {
-            adapter.submitList(it)
+            adapter?.submitList(it)
         })
     }
 
@@ -114,6 +114,9 @@ class ArticlesIndexFragment : Fragment() {
         binding!!.articlesIndex.adapter = null
         binding = null
         viewModel.onDestroy()
+        searchLayout = null
+        searchInput = null
+        searchResetButton = null
     }
 
     override fun onResume() {
