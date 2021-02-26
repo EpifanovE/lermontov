@@ -7,11 +7,31 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="theme">#192a56</color>
 
-    <color name="primary">#273c75</color>
-    <color name="primaryVariant">#192a56</color>
+    <color name="greyTextOnBackgroundWhite">#999999</color>
+    <color name="greyTextOnBackgroundDark">#aaaaaa</color>
+
+    <color name="secondary">#e84118</color>
+    <color name="secondaryVariant">#c23616</color>
+    <color name="primary">#7f8fa6</color>
+    <color name="primaryVariant">#718093</color>
+
     <color name="backgroundWhite">#f5f6fa</color>
-    <color name="onBackgroundWhite">#2f3640</color>
-    <color name="favoriteButtonActive">#f39c12</color>
-    <color name="favoriteButtonNonActive">#bbbbbb</color>
+    <color name="backgroundDark">#111111</color>
+
+    <color name="onBackgroundWhite">#222222</color>
+    <color name="onBackgroundDark">#dfdfdf</color>
+    <color name="colorOnSecondary">#dfdfdf</color>
+    <color name="colorOnPrimary">#dfdfdf</color>
+    <color name="favoriteButtonActive">#e84118</color>
+    <color name="favoriteButtonNonActive">#dcdde1</color>
+
+    <color name="articlesListBgColor">@color/backgroundWhite</color>
+
+    <color name="cardHeaderBgColor">#aaa69d</color>
+    <color name="cardBodyBgColor">#f7f1e3</color>
+    <color name="cardHeaderColor">#000000</color>
+    <color name="cardBodyColor">#222222</color>
+    <color name="cardStrokeColor">#333333</color>
 </resources>

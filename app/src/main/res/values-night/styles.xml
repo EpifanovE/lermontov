@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="input">
+        <item name="android:background">@color/backgroundDark</item>
+        <item name="android:textColor">@color/onBackgroundDark</item>
+        <item name="android:textColorHint">@color/greyTextOnBackgroundDark</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="searchResetButton" parent="@style/Widget.MaterialComponents.Button.TextButton">
+        <item name="iconTint">@color/onBackgroundDark</item>
+    </style>
+
+    <style name="articleIndexItemBody">
+        <item name="android:background">@color/cardBodyBgColor</item>
+    </style>
+
+    <style name="articleIndexItemBodyText">
+        <item name="android:textColor">@color/cardBodyColor</item>
+    </style>
+
+</resources>

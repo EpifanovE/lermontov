@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="viewmodel" type="ru.eecode.dir.domain.FavoritesViewModel" />
+        <variable name="viewmodel" type="ru.eecode.lermontov.domain.FavoritesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/article_item" />
+            android:background="@color/articlesListBgColor"
+            tools:listitem="@layout/article_index_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

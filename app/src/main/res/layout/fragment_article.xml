@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="viewmodel" type="ru.eecode.dir.domain.ArticleViewModel" />
+        <variable name="viewmodel" type="ru.eecode.lermontov.domain.ArticleViewModel" />
     </data>
 
     <ScrollView android:layout_height="match_parent"
@@ -34,7 +34,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewmodel.article.title}"
-            android:fontFamily="@font/roboto_slab_bold"
             app:layout_constraintEnd_toEndOf="@id/contentEnd"
             app:layout_constraintStart_toStartOf="@id/contentStart"
             app:layout_constraintTop_toTopOf="parent"

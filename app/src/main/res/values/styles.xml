@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
     <style name="searchLayout">
         <item name="android:background">@color/primary</item>
         <item name="android:padding">10dp</item>
@@ -10,9 +9,13 @@
 
     <style name="input">
         <item name="android:background">@color/backgroundWhite</item>
-        <item name="android:color">@color/onBackgroundWhite</item>
+        <item name="android:textColor">@color/onBackgroundWhite</item>
+        <item name="android:textColorHint">@color/greyTextOnBackgroundWhite</item>
         <item name="android:padding">10dp</item>
-        <item name="elevation">5dp</item>
+    </style>
+
+    <style name="searchResetButton" parent="@style/Widget.MaterialComponents.Button.TextButton">
+        <item name="iconTint">@color/onBackgroundWhite</item>
     </style>
 
     <style name="favoriteButtonActive" parent="@style/Widget.MaterialComponents.Button.TextButton.Icon">
@@ -25,4 +28,22 @@
         <item name="android:textColor">@color/favoriteButtonNonActive</item>
         <item name="iconTint">@color/favoriteButtonNonActive</item>
     </style>
+
+    <style name="articleIndexItemHeader">
+        <item name="android:background">@color/cardHeaderBgColor</item>
+    </style>
+
+    <style name="articleIndexItemTitle">
+        <item name="android:textColor">@color/cardHeaderColor</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="articleIndexItemBody">
+        <item name="android:background">@color/cardBodyBgColor</item>
+    </style>
+
+    <style name="articleIndexItemBodyText">
+        <item name="android:textColor">@color/cardBodyColor</item>
+    </style>
+
 </resources>

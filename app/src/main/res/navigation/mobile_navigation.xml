@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_articles"
-        android:name="ru.eecode.dir.ui.articles.ArticlesIndexFragment"
+        android:name="ru.eecode.lermontov.ui.articles.ArticlesIndexFragment"
         android:label="@string/menu_articles"
         tools:layout="@layout/fragment_articles_index" >
 
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/nav_favorites"
-        android:name="ru.eecode.dir.ui.favorites.FavoritesFragment"
+        android:name="ru.eecode.lermontov.ui.favorites.FavoritesFragment"
         android:label="@string/menu_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/nav_article"
-        android:name="ru.eecode.dir.ui.articles.ArticleFragment"
+        android:name="ru.eecode.lermontov.ui.articles.ArticleFragment"
         android:label="@string/menu_article" >
         <argument
             android:name="articleId"
@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="ru.eecode.dir.ui.prefs.SettingsFragment"
+        android:name="ru.eecode.lermontov.ui.prefs.SettingsFragment"
         android:label="@string/settings" />
 
 </navigation>

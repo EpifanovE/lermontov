@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.eecode.dir">
+    package="ru.eecode.lermontov">
 
     <application
-        android:name=".App"
+        android:name="ru.eecode.lermontov.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,7 +11,7 @@
         android:theme="@style/Theme.Dir">
 
         <activity
-            android:name=".ui.StartActivity"
+            android:name="ru.eecode.lermontov.ui.StartActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Dir.NoActionBar"
             >
@@ -22,7 +22,7 @@
         </activity>
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name="ru.eecode.lermontov.ui.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Dir.NoActionBar" >
         </activity>

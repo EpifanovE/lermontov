@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="articlesListBgColor">@color/backgroundDark</color>
+
+    <color name="cardHeaderBgColor">#222222</color>
+    <color name="cardBodyBgColor">#222222</color>
+    <color name="cardHeaderColor">#ffffff</color>
+    <color name="cardBodyColor">#dddddd</color>
+    <color name="cardStrokeColor">#333333</color>
+</resources>
