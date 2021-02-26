@@ -9,8 +9,12 @@
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorSecondaryVariant">@color/secondaryVariant</item>
         <item name="colorOnSecondary">@color/white</item>
+        <item name="android:colorBackground">@color/backgroundDark</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.Dir.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" >
+        <item name="android:textColor">@color/onBackgroundDark</item>
     </style>
 </resources>

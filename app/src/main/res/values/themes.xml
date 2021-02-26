@@ -9,10 +9,10 @@
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorSecondaryVariant">@color/secondaryVariant</item>
         <item name="colorOnSecondary">@color/white</item>
-        <item name="android:colorBackground">#f5f6fa</item>
+        <item name="android:colorBackground">@color/backgroundWhite</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+
     </style>
 
     <style name="Theme.Dir.NoActionBar">
