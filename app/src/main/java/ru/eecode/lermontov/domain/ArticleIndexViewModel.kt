@@ -16,7 +16,7 @@ class ArticleIndexViewModel @ViewModelInject constructor(
 
     var filter: MutableLiveData<String?> = MutableLiveData(null)
 
-    var destroyed: MutableLiveData<Boolean> = MutableLiveData(false)
+    var filterChanged: MutableLiveData<Boolean> = MutableLiveData(false)
 
     init {
         val config = PagedList.Config.Builder()
@@ -28,14 +28,14 @@ class ArticleIndexViewModel @ViewModelInject constructor(
         articles = Transformations.switchMap(filter) {
             articleRepository.loadArticles(it).toLiveData(config)
         }
-    }
 
-    fun onResume() {
-        destroyed.value = false
+        filter.observeForever {
+            filterChanged.value = true
+        }
     }
 
     fun onDestroy() {
-        destroyed.value = true
+        filterChanged.value = false
     }
 
     fun addToFavorites(id: Int) {
@@ -48,6 +48,10 @@ class ArticleIndexViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             articleRepository.removeFromFavorites(id)
         }
+    }
+
+    fun needToResetPosition() : Boolean {
+        return filterChanged.value == true
     }
 
 }

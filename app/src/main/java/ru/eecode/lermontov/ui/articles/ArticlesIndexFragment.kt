@@ -32,9 +32,9 @@ class ArticlesIndexFragment : Fragment() {
 
     private var searchLayout: ConstraintLayout? = null
 
-    private var searchInput : EditText? = null
+    private var searchInput: EditText? = null
 
-    private var searchResetButton : Button? = null
+    private var searchResetButton: Button? = null
 
     private lateinit var searchTextWatcher: TextWatcher
 
@@ -86,7 +86,7 @@ class ArticlesIndexFragment : Fragment() {
 
         adapter?.onDataChangedListener = object : ArticleAdapter.OnDataChangedListener {
             override fun onDataChanged() {
-                if (viewModel.destroyed.value != true) {
+                if (viewModel.needToResetPosition()) {
                     binding!!.articlesIndex.layoutManager!!.scrollToPosition(0)
                 }
             }
@@ -117,11 +117,6 @@ class ArticlesIndexFragment : Fragment() {
         searchLayout = null
         searchInput = null
         searchResetButton = null
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.onResume()
     }
 
     private fun setSearchInput() {
