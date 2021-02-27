@@ -25,6 +25,8 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:context="ru.eecode.lermontov.ui.MainActivity"
             android:background="@color/articlesListBgColor"
+            android:scrollbars="vertical"
+            android:scrollbarStyle="outsideOverlay"
             tools:listitem="@layout/article_index_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
