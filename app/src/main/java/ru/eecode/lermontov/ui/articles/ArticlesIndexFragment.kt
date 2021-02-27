@@ -3,6 +3,7 @@ package ru.eecode.lermontov.ui.articles
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.EditText
@@ -109,6 +110,12 @@ class ArticlesIndexFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+
+        val view = activity?.currentFocus
+        if (view != null) {
+            context?.hideKeyboard(view)
+        }
+
         searchInput?.removeTextChangedListener(searchTextWatcher)
         searchLayout?.visibility = View.GONE
         binding!!.articlesIndex.adapter = null
