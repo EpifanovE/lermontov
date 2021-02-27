@@ -15,7 +15,7 @@
         <item name="android:background">@color/cardBodyBgColor</item>
     </style>
 
-    <style name="articleIndexItemBodyText">
+    <style name="articleItemBodyText">
         <item name="android:textColor">@color/cardBodyColor</item>
     </style>
 

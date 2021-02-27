@@ -23,9 +23,8 @@
             android:id="@+id/articleTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
             android:layout_weight="1"
-            style="@style/articleIndexItemTitle"
+            style="@style/articleItemTitle"
             />
 
         <com.google.android.material.button.MaterialButton
@@ -54,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            style="@style/articleIndexItemBodyText"
+            style="@style/articleItemBodyText"
             />
     </LinearLayout>
 
