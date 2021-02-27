@@ -43,12 +43,14 @@ android {
         debug {
             applicationIdSuffix ".debug"
             debuggable true
-//            resValue("string", "interstitialAdId", "ca-app-pub-3940256099942544/1033173712")
+            resValue("string", "bannerAdId", "ca-app-pub-3940256099942544/6300978111")
+            resValue("string", "interstitialAdId", "ca-app-pub-3940256099942544/1033173712")
         }
 
         release {
             minifyEnabled true
-//            resValue("string", "interstitialAdId", "ca-app-pub-4504008939187380/8158534349")
+            resValue("string", "interstitialAdId", "ca-app-pub-4504008939187380/2847073274")
+            resValue("string", "bannerAdId", "ca-app-pub-4504008939187380/3210035353")
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -104,4 +106,6 @@ dependencies {
 
     // Memory leak detection
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
+
+    implementation 'com.google.android.gms:play-services-ads:19.7.0'
 }

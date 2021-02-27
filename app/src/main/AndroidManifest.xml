@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.eecode.lermontov">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="ru.eecode.lermontov.App"
         android:allowBackup="true"
@@ -26,6 +28,10 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.Dir.NoActionBar" >
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4504008939187380~1390327850"/>
 
     </application>
 
