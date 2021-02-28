@@ -6,7 +6,7 @@
     >
 
     <data>
-        <variable name="viewmodel" type="ru.eecode.lermontov.domain.ArticleIndexViewModel" />
+        <variable name="viewmodel" type="ru.eecode.poems.domain.ArticleIndexViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:context="ru.eecode.lermontov.ui.MainActivity"
+            tools:context="ru.eecode.poems.ui.MainActivity"
             android:background="@color/articlesListBgColor"
             android:scrollbars="vertical"
             android:scrollbarStyle="outsideOverlay"

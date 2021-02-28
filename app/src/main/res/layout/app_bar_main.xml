@@ -9,7 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Dir.AppBarOverlay">
+        android:theme="@style/Theme.Poems.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -19,7 +19,7 @@
             android:clickable="true"
             android:focusableInTouchMode="true"
             android:focusable="true"
-            app:popupTheme="@style/Theme.Dir.PopupOverlay" />
+            app:popupTheme="@style/Theme.Poems.PopupOverlay" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/searchLayout"

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.eecode.lermontov">
+    package="ru.eecode.poems">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="ru.eecode.lermontov.App"
+        android:name="ru.eecode.poems.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/Theme.Dir">
+        android:theme="@style/Theme.Poems">
 
         <activity
-            android:name="ru.eecode.lermontov.ui.StartActivity"
+            android:name="ru.eecode.poems.ui.StartActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Dir.NoActionBar"
+            android:theme="@style/Theme.Poems.NoActionBar"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,14 +24,14 @@
         </activity>
 
         <activity
-            android:name="ru.eecode.lermontov.ui.MainActivity"
+            android:name="ru.eecode.poems.ui.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Dir.NoActionBar" >
+            android:theme="@style/Theme.Poems.NoActionBar" >
         </activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4504008939187380~1390327850"/>
+            android:value="@string/adMobAppId"/>
 
     </application>
 

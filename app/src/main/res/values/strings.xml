@@ -1,16 +1,16 @@
 <resources>
-    <string name="app_name">М.Ю.Лермонтов - Сборник стихов</string>
-
     <string name="nav_header_title">@string/app_name</string>
     <string name="nav_header_subtitle">eevcode@gmail.com</string>
 
     <string name="favorites">Избранное</string>
     <string name="settings">Настройки</string>
+    <string name="store">Магазин</string>
 
     <string name="menu_articles">Каталог</string>
     <string name="menu_article">Просмотр</string>
     <string name="menu_favorites">@string/favorites</string>
     <string name="menu_settings">@string/settings</string>
+    <string name="menu_store">Отключить рекламу</string>
 
     <string name="action_settings">@string/settings</string>
     <string name="action_add_to_favorites">В избранное</string>

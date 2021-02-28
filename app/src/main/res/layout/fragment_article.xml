@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="viewmodel" type="ru.eecode.lermontov.domain.ArticleViewModel" />
+        <variable name="viewmodel" type="ru.eecode.poems.domain.ArticleViewModel" />
     </data>
 
     <ScrollView android:layout_height="match_parent"

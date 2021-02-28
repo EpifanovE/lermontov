@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="viewmodel" type="ru.eecode.lermontov.domain.FavoritesViewModel" />
+        <variable name="viewmodel" type="ru.eecode.poems.domain.FavoritesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
