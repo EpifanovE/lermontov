@@ -11,6 +11,7 @@ import androidx.preference.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eecode.poems.R
 import ru.eecode.poems.databinding.FragmentArticleBinding
+import ru.eecode.poems.databinding.FragmentArticlesIndexBinding
 import ru.eecode.poems.domain.ArticleViewModel
 
 @AndroidEntryPoint
@@ -18,13 +19,17 @@ class ArticleFragment : Fragment() {
 
     private val viewModel: ArticleViewModel by activityViewModels()
 
-    private var binding: FragmentArticleBinding? = null
+    private var _binding: FragmentArticleBinding? = null
+
+    private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val rootView = inflater.inflate(R.layout.fragment_article, container, false)
-        setHasOptionsMenu(true)
 
+        _binding = FragmentArticleBinding.inflate(inflater, container, false)
+
+        val rootView = binding.root
+        setHasOptionsMenu(true)
 
         return rootView
     }
@@ -32,12 +37,11 @@ class ArticleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentArticleBinding.bind(view)
-        binding!!.lifecycleOwner = viewLifecycleOwner
-        binding!!.viewmodel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewmodel = viewModel
 
-        binding!!.articleContent.textSize = getTextSize() ?: 18f
-        binding!!.articleTitle.textSize = getTextSize() ?: 18f
+        binding.articleContent.textSize = getTextSize() ?: 18f
+        binding.articleTitle.textSize = getTextSize() ?: 18f
 
         viewModel.articleId.value = arguments?.getInt("articleId")
 
@@ -45,7 +49,7 @@ class ArticleFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -21,13 +21,13 @@ class MainActivityAdsObserver constructor(
     private val navController: NavController
 ) : LifecycleObserver {
 
-    private var adView: AdView? = null
+    private lateinit var adView: AdView
 
     private var interstitialAd: InterstitialAd? = null
 
-    private var interstitialRequest: AdRequest? = null
+    private lateinit var interstitialRequest: AdRequest
 
-    private var prefs: SharedPreferences? = null
+    private lateinit var prefs: SharedPreferences
 
     private var interstitialNumber : Int = 5
 
@@ -69,19 +69,19 @@ class MainActivityAdsObserver constructor(
         }
 
     private fun loadBanner() {
-        adView!!.adUnitId = activity.resources.getString(R.string.bannerAdId)
-        adView!!.adSize = adSize
+        adView.adUnitId = activity.resources.getString(R.string.bannerAdId)
+        adView.adSize = adSize
 
         val adRequest = AdRequest
             .Builder()
             .addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build()
 
-        adView!!.loadAd(adRequest)
+        adView.loadAd(adRequest)
     }
 
     private fun loadInterstitialAd() {
 
-        if (prefs!!.getInt(interstitialCountKey, 0) < interstitialNumber - 1) {
+        if (prefs.getInt(interstitialCountKey, 0) < interstitialNumber - 1) {
             return
         }
 
@@ -93,12 +93,12 @@ class MainActivityAdsObserver constructor(
                 override fun onAdLoaded(ad: InterstitialAd) {
                     interstitialAd = ad
 
-                    interstitialAd!!.fullScreenContentCallback = object : FullScreenContentCallback() {
+                    interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
                         override fun onAdShowedFullScreenContent() {
                             super.onAdShowedFullScreenContent()
                             interstitialAd = null
 
-                            with (prefs!!.edit()) {
+                            with (prefs.edit()) {
                                 putInt(interstitialCountKey, 0)
                                 apply()
                             }
@@ -126,16 +126,16 @@ class MainActivityAdsObserver constructor(
 
     private fun showInterstitialAd() {
         if (interstitialAd != null) {
-            interstitialAd!!.show(activity)
+            interstitialAd?.show(activity)
         }
     }
 
     private fun onNavDestinationChange(destination: NavDestination) {
-        if (destination.id == R.id.nav_articles) {
+        if (destination.id == R.id.nav_articles || destination.id == R.id.nav_favorites) {
             showInterstitialAd()
 
-            with (prefs!!.edit()) {
-                var currentCount = prefs!!.getInt(interstitialCountKey, 0);
+            with (prefs.edit()) {
+                var currentCount = prefs.getInt(interstitialCountKey, 0);
                 putInt(interstitialCountKey, ++currentCount)
                 apply()
             }

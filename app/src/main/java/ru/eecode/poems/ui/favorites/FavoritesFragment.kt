@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eecode.poems.R
+import ru.eecode.poems.databinding.FragmentArticlesIndexBinding
 import ru.eecode.poems.databinding.FragmentFavoritesBinding
 import ru.eecode.poems.domain.FavoritesViewModel
 import ru.eecode.poems.repository.db.articles.ArticleListItem
@@ -19,11 +20,13 @@ import ru.eecode.poems.ui.articles.ArticleAdapter
 @AndroidEntryPoint
 class FavoritesFragment : Fragment() {
 
-    private val adapter: ArticleAdapter = ArticleAdapter()
+    private var adapter: ArticleAdapter? = ArticleAdapter()
 
     private val viewModel: FavoritesViewModel by activityViewModels()
 
-    private var binding: FragmentFavoritesBinding? = null
+    private var _binding: FragmentFavoritesBinding? = null
+
+    private val binding get() = _binding!!
 
     private var articlesLayoutManager: LinearLayoutManager? = null
 
@@ -32,7 +35,10 @@ class FavoritesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView = inflater.inflate(R.layout.fragment_favorites, container, false)
+
+        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+
+        val rootView = binding.root
         setHasOptionsMenu(true)
         return rootView
     }
@@ -40,22 +46,22 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentFavoritesBinding.bind(view)
-        binding!!.lifecycleOwner = viewLifecycleOwner
-        binding!!.viewmodel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewmodel = viewModel
+
 
         articlesLayoutManager = LinearLayoutManager(context)
 
-        adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        adapter?.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
-        adapter.onItemClickListener = object : ArticleAdapter.OnItemClickListener {
+        adapter?.onItemClickListener = object : ArticleAdapter.OnItemClickListener {
             override fun onItemClick(item: ArticleListItem) {
                 val bundle = bundleOf("articleId" to item.id)
                 Navigation.findNavController(view).navigate(R.id.action_nav_favorites_to_articleFragment, bundle)
             }
         }
 
-        adapter.onFavoriteClickListener = object : ArticleAdapter.OnFavoriteClickListener {
+        adapter?.onFavoriteClickListener = object : ArticleAdapter.OnFavoriteClickListener {
             override fun onClick(articleId: Int, isFavorite: Boolean) {
                 if (isFavorite) {
                     viewModel.removeFromFavorites(articleId)
@@ -65,13 +71,11 @@ class FavoritesFragment : Fragment() {
             }
         }
 
-        val articlesIndex = binding!!.favoritesIndex
-
-        articlesIndex.layoutManager = articlesLayoutManager
-        articlesIndex.adapter = adapter
+        binding.favoritesIndex.layoutManager = articlesLayoutManager
+        binding.favoritesIndex.adapter = adapter
 
         viewModel.favorites.observe(viewLifecycleOwner, {
-            adapter.submitList(it)
+            adapter?.submitList(it)
         })
     }
 
@@ -107,5 +111,12 @@ class FavoritesFragment : Fragment() {
 
         val dialog: AlertDialog? = builder?.create()
         dialog?.show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.favoritesIndex.adapter = null
+        articlesLayoutManager = null
+        _binding = null
     }
 }

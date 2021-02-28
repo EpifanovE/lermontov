@@ -21,9 +21,9 @@ import ru.eecode.poems.ui.observers.MainActivityAdsObserver
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private var appBarConfiguration: AppBarConfiguration? = null
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
-    private var navController: NavController? = null
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,17 +41,17 @@ class MainActivity : AppCompatActivity() {
             ), drawerLayout
         )
 
-        setupActionBarWithNavController(navController!!, appBarConfiguration!!)
-        navView.setupWithNavController(navController!!)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
 
-        val mainActivityAdsObserver = MainActivityAdsObserver(this, findViewById(R.id.bannerContainer), navController!!)
+        val mainActivityAdsObserver = MainActivityAdsObserver(this, findViewById(R.id.bannerContainer), navController)
         lifecycle.addObserver(mainActivityAdsObserver)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu);
         val settingsItem: MenuItem = menu.findItem(R.id.action_settings)
-        settingsItem.isVisible = navController!!.currentDestination?.id != R.id.nav_settings
+        settingsItem.isVisible = navController.currentDestination?.id != R.id.nav_settings
         return true;
     }
 
@@ -60,16 +60,10 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration!!) || super.onSupportNavigateUp()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        appBarConfiguration = null
-        navController = null
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_settings -> {
-                navController!!.navigate(R.id.nav_settings)
+                navController.navigate(R.id.nav_settings)
                 true
             }
             else -> super.onOptionsItemSelected(item)

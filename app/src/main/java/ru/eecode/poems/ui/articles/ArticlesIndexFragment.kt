@@ -28,7 +28,9 @@ class ArticlesIndexFragment : Fragment() {
 
     private val viewModel: ArticleIndexViewModel by activityViewModels()
 
-    private var binding: FragmentArticlesIndexBinding? = null
+    private var _binding: FragmentArticlesIndexBinding? = null
+
+    private val binding get() = _binding!!
 
     private var searchLayout: ConstraintLayout? = null
 
@@ -45,21 +47,23 @@ class ArticlesIndexFragment : Fragment() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
 
+        _binding = FragmentArticlesIndexBinding.inflate(inflater, container, false)
+
         adapter?.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
-        val rootView = inflater.inflate(R.layout.fragment_articles_index, container, false)
+        val rootView = binding.root
         setHasOptionsMenu(true)
         return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentArticlesIndexBinding.bind(view)
-        binding!!.lifecycleOwner = this
-        binding!!.viewmodel = viewModel
 
-        binding!!.articlesIndex.layoutManager = LinearLayoutManager(context)
-        binding!!.articlesIndex.adapter = adapter
+        binding.lifecycleOwner = this
+        binding.viewmodel = viewModel
+
+        binding.articlesIndex.layoutManager = LinearLayoutManager(context)
+        binding.articlesIndex.adapter = adapter
 
         searchLayout = activity?.findViewById(R.id.searchLayout);
         searchInput = searchLayout?.findViewById(R.id.searchInput)
@@ -87,7 +91,7 @@ class ArticlesIndexFragment : Fragment() {
         adapter?.onDataChangedListener = object : ArticleAdapter.OnDataChangedListener {
             override fun onDataChanged() {
                 if (viewModel.needToResetPosition()) {
-                    binding!!.articlesIndex.layoutManager!!.scrollToPosition(0)
+                    binding.articlesIndex.layoutManager?.scrollToPosition(0)
                 }
             }
         }
@@ -117,8 +121,8 @@ class ArticlesIndexFragment : Fragment() {
 
         searchInput?.removeTextChangedListener(searchTextWatcher)
         searchLayout?.visibility = View.GONE
-        binding!!.articlesIndex.adapter = null
-        binding = null
+        binding.articlesIndex.adapter = null
+        _binding = null
         viewModel.onDestroy()
         searchLayout = null
         searchInput = null

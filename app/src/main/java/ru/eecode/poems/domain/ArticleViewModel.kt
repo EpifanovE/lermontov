@@ -20,7 +20,10 @@ class ArticleViewModel  @ViewModelInject constructor(
     init {
         articleId.observeForever {
             loadArticle()
-            checkIsFavorite()
+
+            if (it != null) {
+                checkIsFavorite(it)
+            }
         }
     }
 
@@ -33,30 +36,29 @@ class ArticleViewModel  @ViewModelInject constructor(
         }
     }
 
-    private fun checkIsFavorite() {
-
-        if (articleId.value != null) {
-            isFavorite = articleRepository.isFavorite(articleId.value!!)
-        }
+    private fun checkIsFavorite(id: Int) {
+        isFavorite = articleRepository.isFavorite(id)
     }
 
     fun toggleFavorites() {
         if (isFavorite.value != null) {
-            removeFromFavorites()
+            removeFromFavorites(articleId.value)
         } else {
-            addToFavorites()
+            addToFavorites(articleId.value)
         }
     }
 
-    private fun addToFavorites() {
+    private fun addToFavorites(id: Int?) {
+        if (id == null) return
         viewModelScope.launch {
-            articleRepository.addToFavorites(articleId.value!!)
+            articleRepository.addToFavorites(id)
         }
     }
 
-    private fun removeFromFavorites() {
+    private fun removeFromFavorites(id: Int?) {
+        if (id == null) return
         viewModelScope.launch {
-            articleRepository.removeFromFavorites(articleId.value!!)
+            articleRepository.removeFromFavorites(id)
         }
     }
 }
