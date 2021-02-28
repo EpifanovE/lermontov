@@ -1,14 +1,16 @@
 package ru.eecode.poems.domain
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.eecode.poems.repository.ArticleRepository
 import ru.eecode.poems.repository.db.articles.ArticleListItem
+import javax.inject.Inject
 
-class ArticleIndexViewModel @ViewModelInject constructor(
+@HiltViewModel
+class ArticleIndexViewModel @Inject constructor(
     private val articleRepository: ArticleRepository
 ) : ViewModel() {
 

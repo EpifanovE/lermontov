@@ -5,11 +5,14 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.eecode.poems.R
 import ru.eecode.poems.repository.ArticleRepository
+import javax.inject.Inject
 
-class StartActivityViewModel @ViewModelInject constructor(
+@HiltViewModel
+class StartActivityViewModel @Inject constructor(
     private val articleRepository: ArticleRepository,
     application: Application
 ) : AndroidViewModel(application) {

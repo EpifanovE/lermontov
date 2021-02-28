@@ -2,12 +2,15 @@ package ru.eecode.poems.domain
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.eecode.poems.repository.ArticleRepository
 import ru.eecode.poems.repository.db.articles.Article
 import ru.eecode.poems.repository.db.favorites.Favorite
+import javax.inject.Inject
 
-class ArticleViewModel  @ViewModelInject constructor(
+@HiltViewModel
+class ArticleViewModel  @Inject constructor(
     private val articleRepository: ArticleRepository
 ) : ViewModel() {
 

@@ -6,11 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.eecode.poems.repository.ArticleRepository
 import ru.eecode.poems.repository.db.articles.ArticleListItem
+import javax.inject.Inject
 
-class FavoritesViewModel  @ViewModelInject constructor(
+@HiltViewModel
+class FavoritesViewModel  @Inject constructor(
     private val articleRepository: ArticleRepository
 ) : ViewModel() {
 

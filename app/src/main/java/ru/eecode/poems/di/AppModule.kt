@@ -43,5 +43,4 @@ object AppModule {
     @Singleton
     @Provides
     fun provideArticleRepository(articleDao: ArticleDao, favoriteDao: FavoriteDao, jsonAssetsLoader: JsonAssetsLoader) = ArticleRepository(articleDao, favoriteDao, jsonAssetsLoader)
-
 }

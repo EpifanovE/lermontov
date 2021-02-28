@@ -35,6 +35,11 @@ class MainActivityAdsObserver constructor(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun init() {
+
+        if (adsIsDisabled()) {
+            return
+        }
+
         interstitialNumber = activity.resources.getInteger(R.integer.interstitialNumber)
         prefs = activity.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
 
@@ -144,5 +149,9 @@ class MainActivityAdsObserver constructor(
         if (destination.id == R.id.nav_article) {
             loadInterstitialAd()
         }
+    }
+
+    private fun adsIsDisabled() : Boolean {
+        return activity.storeViewModel.noAdsPurchased.value == true
     }
 }

@@ -1,25 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable name="storeViewModel" type="ru.eecode.poems.domain.StoreViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/contentStart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintGuide_begin="15dp"
+            android:orientation="vertical"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/contentEnd"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintGuide_end="15dp"
+            android:orientation="vertical"
+            />
+
         <TextView
+            android:id="@+id/storeText"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="Store"
+            app:layout_constraintStart_toStartOf="@id/contentStart"
+            app:layout_constraintEnd_toEndOf="@id/contentEnd"
+            android:layout_marginTop="20dp"
+            android:text="@string/store_text"
             />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/productsList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@id/contentStart"
+            app:layout_constraintEnd_toEndOf="@id/contentEnd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/storeText"
+            tools:context="ru.eecode.poems.ui.MainActivity"
+            android:background="@color/articlesListBgColor"
+            android:scrollbars="vertical"
+            android:scrollbarStyle="outsideOverlay"
+            tools:listitem="@layout/product_list_item" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
