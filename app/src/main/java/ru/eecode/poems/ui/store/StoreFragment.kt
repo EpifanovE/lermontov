@@ -1,6 +1,7 @@
 package ru.eecode.poems.ui.store
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.android.billingclient.api.SkuDetails
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eecode.poems.databinding.FragmentStoreBinding
 import ru.eecode.poems.domain.StoreViewModel
+import ru.eecode.poems.domain.store.StoreProduct
 import ru.eecode.poems.ui.MainActivity
 
 @AndroidEntryPoint
@@ -43,10 +45,10 @@ class StoreFragment: Fragment() {
         binding.productsList.layoutManager = LinearLayoutManager(context)
 
         adapter?.onItemClickListener = object : ProductAdapter.OnItemClickListener {
-            override fun onItemClick(item: SkuDetails) {
+            override fun onItemClick(item: StoreProduct) {
 
                 val flowParams = BillingFlowParams.newBuilder()
-                    .setSkuDetails(item)
+                    .setSkuDetails(item.skuDetails)
                     .build()
 
                 val responseCode = (requireActivity() as MainActivity).billingClient.launchBillingFlow(requireActivity(), flowParams).responseCode
@@ -56,7 +58,9 @@ class StoreFragment: Fragment() {
         binding.productsList.adapter = adapter
 
         storeViewModel.products.observe(viewLifecycleOwner, {
-            adapter?.setItems(it)
+            if (it != null) {
+                adapter?.setItems(it)
+            }
         })
     }
 

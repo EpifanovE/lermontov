@@ -32,5 +32,6 @@
     <string name="no">Нет</string>
 
     <string name="store_text">Давно выяснено, что при оценке дизайна и композиции читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому.</string>
+    <string name="thanks_for_purchase">Спасибо за оплату!</string>
 
 </resources>

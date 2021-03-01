@@ -1,6 +1,7 @@
 package ru.eecode.poems.di
 
 import android.content.Context
+import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,4 +44,8 @@ object AppModule {
     @Singleton
     @Provides
     fun provideArticleRepository(articleDao: ArticleDao, favoriteDao: FavoriteDao, jsonAssetsLoader: JsonAssetsLoader) = ArticleRepository(articleDao, favoriteDao, jsonAssetsLoader)
+
+    @Singleton
+    @Provides
+    fun provideFirebaseAnalytics(@ApplicationContext appContext: Context) : FirebaseAnalytics = FirebaseAnalytics.getInstance(appContext)
 }

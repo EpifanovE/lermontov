@@ -3,7 +3,6 @@ package ru.eecode.poems.domain
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

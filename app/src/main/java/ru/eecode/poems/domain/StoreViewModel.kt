@@ -5,27 +5,74 @@ import androidx.lifecycle.ViewModel
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.SkuDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
+import ru.eecode.poems.domain.store.StoreProduct
 import javax.inject.Inject
 
 @HiltViewModel
-class StoreViewModel @Inject constructor(): ViewModel() {
+class StoreViewModel @Inject constructor() : ViewModel() {
 
-    var products: MutableLiveData<List<SkuDetails>> = MutableLiveData(null)
+    var products: MutableLiveData<List<StoreProduct>> = MutableLiveData(ArrayList())
 
-    var purchases: MutableLiveData<List<Purchase>?> = MutableLiveData(null)
+    var purchases: MutableLiveData<List<Purchase>> = MutableLiveData(ArrayList())
 
     var noAdsPurchased: MutableLiveData<Boolean> = MutableLiveData(false)
 
     var purchasedAreLoaded: MutableLiveData<Boolean> = MutableLiveData(false)
 
+    var productsInResources: MutableLiveData<Array<String>> = MutableLiveData(null)
+
     init {
         purchases.observeForever {
             purchasedAreLoaded.value = true
 
-            if (purchases.value?.size?.compareTo(0) != 0) {
+            if (isProductAvailable(it)) {
                 noAdsPurchased.value = true
             }
+
+            products.value?.let { products -> setProducts(products) }
         }
+    }
+
+    private fun isProductAvailable(purchases: List<Purchase>?): Boolean {
+        if (productsInResources.value.isNullOrEmpty()) {
+            return false
+        }
+
+        if (purchases.isNullOrEmpty()) {
+            return false
+        }
+
+        for (purchase in purchases) {
+            if (productsInResources.value?.contains(purchase.sku) == true) {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    fun addPurchases(purchasesToAdd: List<Purchase>?) {
+        val newPurchases = arrayListOf<Purchase>()
+
+        purchasesToAdd?.let { newPurchases.addAll(it) }
+        purchases.value?.let { newPurchases.addAll(it) }
+
+        purchases.value = newPurchases
+    }
+
+    fun setProducts(productsToSet: List<StoreProduct>) {
+        products.value = productsToSet.map {
+            it.isPurchased = isPurchased(it.skuDetails)
+            it
+        }
+    }
+
+    private fun isPurchased(skuDetails: SkuDetails): Boolean {
+        val purchasesSkus = purchases.value?.map {
+            it.sku
+        }
+
+        return purchasesSkus?.contains(skuDetails.sku) == true
     }
 
 }

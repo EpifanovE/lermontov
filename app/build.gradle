@@ -7,6 +7,8 @@ plugins {
 
 apply plugin: 'dagger.hilt.android.plugin'
 
+apply plugin: 'com.google.gms.google-services'
+
 final VERSION_NAME = '1.0'
 final VERSION_CODE = 1
 
@@ -60,8 +62,9 @@ android {
         lermontov {
             dimension "version"
             applicationId = "ru.eecode.lermontov"
-            resValue("integer", "contentVersion", "1")
 
+            resValue("integer", "contentVersion", "1")
+            resValue("bool", "isPaidVersion", "false")
             resValue("string", "adMobAppId", "ca-app-pub-4504008939187380~1390327850")
             resValue("string", "interstitialAdId", "ca-app-pub-4504008939187380/2847073274")
             resValue("string", "bannerAdId", "ca-app-pub-4504008939187380/3210035353")
@@ -70,8 +73,9 @@ android {
         pushkin {
             dimension "version"
             applicationId = "ru.eecode.pushkin"
-            resValue("integer", "contentVersion", "1")
 
+            resValue("bool", "isPaidVersion", "false")
+            resValue("integer", "contentVersion", "1")
             resValue("string", "adMobAppId", "ca-app-pub-4504008939187380~1390327850")
         }
     }
@@ -130,6 +134,9 @@ dependencies {
 
     def billing_version = "3.0.2"
     implementation "com.android.billingclient:billing:$billing_version"
+
+    implementation platform('com.google.firebase:firebase-bom:26.5.0')
+    implementation 'com.google.firebase:firebase-analytics'
 
     // Memory leak detection
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'

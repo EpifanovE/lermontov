@@ -8,11 +8,14 @@ import androidx.core.graphics.BlendModeCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.preference.PreferenceManager
+import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.hilt.android.AndroidEntryPoint
+import ru.eecode.poems.App
 import ru.eecode.poems.R
 import ru.eecode.poems.databinding.FragmentArticleBinding
 import ru.eecode.poems.databinding.FragmentArticlesIndexBinding
 import ru.eecode.poems.domain.ArticleViewModel
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ArticleFragment : Fragment() {

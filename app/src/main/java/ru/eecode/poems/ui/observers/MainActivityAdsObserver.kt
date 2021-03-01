@@ -3,6 +3,8 @@ package ru.eecode.poems.ui.observers
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.DisplayMetrics
+import android.util.Log
+import android.view.View
 import android.widget.RelativeLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
@@ -25,34 +27,59 @@ class MainActivityAdsObserver constructor(
 
     private var interstitialAd: InterstitialAd? = null
 
-    private lateinit var interstitialRequest: AdRequest
-
     private lateinit var prefs: SharedPreferences
 
     private var interstitialNumber : Int = 5
 
     private val interstitialCountKey: String = "interstitial_count"
 
+    private var enableAds: Boolean = false
+
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun init() {
-
-        if (adsIsDisabled()) {
-            return
-        }
 
         interstitialNumber = activity.resources.getInteger(R.integer.interstitialNumber)
         prefs = activity.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
 
         MobileAds.initialize(activity) {}
 
+        navController.addOnDestinationChangedListener { _, destination, _ -> onNavDestinationChange(destination) }
+
+        activity.storeViewModel.noAdsPurchased.observe(activity, {
+            if (it == true) {
+                disableAds()
+            } else if (it == false){
+                enableAds()
+            }
+        });
+    }
+
+    private fun enableAds() {
+        if (activity.resources.getBoolean(R.bool.isPaidVersion)) {
+            return;
+        }
+        enableAds = true
+        initBanner()
+    }
+
+    private fun initBanner() {
         adView = AdView(activity)
         adViewContainer.addView(adView)
-        loadBanner()
 
-        interstitialRequest = AdRequest.Builder().build()
-        loadInterstitialAd()
+        adView.adUnitId = activity.resources.getString(R.string.bannerAdId)
+        adView.adSize = adSize
 
-        navController.addOnDestinationChangedListener { _, destination, _ -> onNavDestinationChange(destination) }
+        val adRequest = AdRequest
+            .Builder()
+            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build()
+
+        adView.loadAd(adRequest)
+    }
+
+    private fun disableAds() {
+        enableAds = false
+        adViewContainer.removeAllViews()
+        adViewContainer.visibility = View.GONE
     }
 
     private val adSize: AdSize
@@ -73,18 +100,12 @@ class MainActivityAdsObserver constructor(
             return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(activity, adWidth)
         }
 
-    private fun loadBanner() {
-        adView.adUnitId = activity.resources.getString(R.string.bannerAdId)
-        adView.adSize = adSize
-
-        val adRequest = AdRequest
-            .Builder()
-            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build()
-
-        adView.loadAd(adRequest)
-    }
 
     private fun loadInterstitialAd() {
+
+        if (!enableAds) {
+            return
+        }
 
         if (prefs.getInt(interstitialCountKey, 0) < interstitialNumber - 1) {
             return
@@ -138,20 +159,21 @@ class MainActivityAdsObserver constructor(
     private fun onNavDestinationChange(destination: NavDestination) {
         if (destination.id == R.id.nav_articles || destination.id == R.id.nav_favorites) {
             showInterstitialAd()
+        }
 
+        if (destination.id == R.id.nav_article) {
             with (prefs.edit()) {
                 var currentCount = prefs.getInt(interstitialCountKey, 0);
                 putInt(interstitialCountKey, ++currentCount)
                 apply()
             }
-        }
-
-        if (destination.id == R.id.nav_article) {
             loadInterstitialAd()
         }
-    }
 
-    private fun adsIsDisabled() : Boolean {
-        return activity.storeViewModel.noAdsPurchased.value == true
+        if (destination.id == R.id.nav_store || destination.id == R.id.nav_settings) {
+            adViewContainer.visibility = View.GONE
+        } else {
+            adViewContainer.visibility = View.VISIBLE
+        }
     }
 }

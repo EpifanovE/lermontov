@@ -1,6 +1,5 @@
 package ru.eecode.poems.domain
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
