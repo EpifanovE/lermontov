@@ -4,4 +4,9 @@
         <item>lermontov_test_1</item>
         <item>lermontov_ads_1</item>
     </string-array>
+
+    <integer-array name="product_images">
+        <item>@drawable/star_1</item>
+        <item>@drawable/star_1</item>
+    </integer-array>
 </resources>

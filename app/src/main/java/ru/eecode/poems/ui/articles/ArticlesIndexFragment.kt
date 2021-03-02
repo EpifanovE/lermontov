@@ -3,19 +3,23 @@ package ru.eecode.poems.ui.articles
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.EditText
+import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eecode.poems.R
 import ru.eecode.poems.databinding.FragmentArticlesIndexBinding
+import ru.eecode.poems.domain.AdsViewModel
 import ru.eecode.poems.domain.ArticleIndexViewModel
 import ru.eecode.poems.repository.db.articles.ArticleListItem
 import ru.eecode.poems.utils.hideKeyboard
@@ -24,7 +28,7 @@ import ru.eecode.poems.utils.hideKeyboard
 @AndroidEntryPoint
 class ArticlesIndexFragment : Fragment() {
 
-    private var adapter: ArticleAdapter? = ArticleAdapter()
+    private var adapter: ArticleAdapter? = null
 
     private val viewModel: ArticleIndexViewModel by activityViewModels()
 
@@ -38,7 +42,9 @@ class ArticlesIndexFragment : Fragment() {
 
     private var searchResetButton: Button? = null
 
-    private lateinit var searchTextWatcher: TextWatcher
+    private var searchTextWatcher: TextWatcher? = null
+
+    val adsViewModel: AdsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,6 +67,8 @@ class ArticlesIndexFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.viewmodel = viewModel
+
+        adapter = ArticleAdapter()
 
         binding.articlesIndex.layoutManager = LinearLayoutManager(context)
         binding.articlesIndex.adapter = adapter
@@ -109,6 +117,8 @@ class ArticlesIndexFragment : Fragment() {
         viewModel.articles.observe(viewLifecycleOwner, {
             adapter?.submitList(it)
         })
+
+        adsViewModel.showEvent.postValue(true)
     }
 
     override fun onDestroyView() {
@@ -119,6 +129,8 @@ class ArticlesIndexFragment : Fragment() {
             context?.hideKeyboard(view)
         }
 
+        adapter = null
+        searchTextWatcher = null
         searchInput?.removeTextChangedListener(searchTextWatcher)
         searchLayout?.visibility = View.GONE
         binding.articlesIndex.adapter = null

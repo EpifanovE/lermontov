@@ -14,6 +14,7 @@ import ru.eecode.poems.App
 import ru.eecode.poems.R
 import ru.eecode.poems.databinding.FragmentArticleBinding
 import ru.eecode.poems.databinding.FragmentArticlesIndexBinding
+import ru.eecode.poems.domain.AdsViewModel
 import ru.eecode.poems.domain.ArticleViewModel
 import javax.inject.Inject
 
@@ -25,6 +26,8 @@ class ArticleFragment : Fragment() {
     private var _binding: FragmentArticleBinding? = null
 
     private val binding get() = _binding!!
+
+    val adsViewModel: AdsViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -48,6 +51,7 @@ class ArticleFragment : Fragment() {
 
         viewModel.articleId.value = arguments?.getInt("articleId")
 
+        adsViewModel.loadEvent.postValue(true)
     }
 
     override fun onDestroyView() {

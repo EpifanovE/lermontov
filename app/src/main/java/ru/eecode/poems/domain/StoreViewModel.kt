@@ -2,10 +2,12 @@ package ru.eecode.poems.domain
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.android.billingclient.api.BillingFlowParams
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.SkuDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ru.eecode.poems.domain.store.StoreProduct
+import ru.eecode.poems.ui.SingleLiveEvent
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,13 +23,15 @@ class StoreViewModel @Inject constructor() : ViewModel() {
 
     var productsInResources: MutableLiveData<Array<String>> = MutableLiveData(null)
 
+    val buyEvent = SingleLiveEvent<BillingFlowParams>()
+
     init {
         purchases.observeForever {
             purchasedAreLoaded.value = true
 
-            if (isProductAvailable(it)) {
-                noAdsPurchased.value = true
-            }
+//            if (isProductAvailable(it)) {
+//                noAdsPurchased.value = true
+//            }
 
             products.value?.let { products -> setProducts(products) }
         }
@@ -73,6 +77,14 @@ class StoreViewModel @Inject constructor() : ViewModel() {
         }
 
         return purchasesSkus?.contains(skuDetails.sku) == true
+    }
+
+    fun buy(skuDetails: SkuDetails) {
+        val flowParams = BillingFlowParams.newBuilder()
+            .setSkuDetails(skuDetails)
+            .build()
+
+        buyEvent.postValue(flowParams)
     }
 
 }

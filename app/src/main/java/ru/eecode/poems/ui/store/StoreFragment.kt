@@ -8,13 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.billingclient.api.BillingFlowParams
-import com.android.billingclient.api.SkuDetails
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eecode.poems.databinding.FragmentStoreBinding
 import ru.eecode.poems.domain.StoreViewModel
 import ru.eecode.poems.domain.store.StoreProduct
-import ru.eecode.poems.ui.MainActivity
 
 @AndroidEntryPoint
 class StoreFragment: Fragment() {
@@ -46,12 +43,7 @@ class StoreFragment: Fragment() {
 
         adapter?.onItemClickListener = object : ProductAdapter.OnItemClickListener {
             override fun onItemClick(item: StoreProduct) {
-
-                val flowParams = BillingFlowParams.newBuilder()
-                    .setSkuDetails(item.skuDetails)
-                    .build()
-
-                val responseCode = (requireActivity() as MainActivity).billingClient.launchBillingFlow(requireActivity(), flowParams).responseCode
+                storeViewModel.buy(item.skuDetails)
             }
         }
 

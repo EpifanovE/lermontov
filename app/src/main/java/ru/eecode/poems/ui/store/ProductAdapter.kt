@@ -1,12 +1,13 @@
 package ru.eecode.poems.ui.store
 
+import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.android.billingclient.api.SkuDetails
 import ru.eecode.poems.R
 import ru.eecode.poems.domain.store.StoreProduct
 
@@ -49,15 +50,19 @@ class ProductAdapter @Inject constructor() : RecyclerView.Adapter<ProductAdapter
         private val titleView: TextView = itemView.findViewById(R.id.productTitle)
         private val descriptionView: TextView = itemView.findViewById(R.id.productDescription)
         private val priceView: TextView = itemView.findViewById(R.id.productPrice)
-        private val purchased: TextView = itemView.findViewById(R.id.isPurchased)
+        private val imageView: ImageView = itemView.findViewById(R.id.productImage)
 
         fun bindTo(product: StoreProduct) {
             titleView.text = product.skuDetails.title
             descriptionView.text = product.skuDetails.description
             priceView.text = product.skuDetails.price
 
-            if (product.isPurchased) {
-                purchased.visibility = View.VISIBLE
+            if (product.image == null) {
+                imageView.visibility = View.GONE
+            }
+
+            product.image?.let {
+                imageView.setImageDrawable(it)
             }
         }
     }
