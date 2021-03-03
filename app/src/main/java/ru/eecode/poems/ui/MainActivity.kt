@@ -1,32 +1,20 @@
 package ru.eecode.poems.ui
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.RelativeLayout
 
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.LifecycleOwner
 
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.ads.*
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,9 +33,9 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var navController: NavController
 
-    val storeViewModel: StoreViewModel by viewModels()
+    private val storeViewModel: StoreViewModel by viewModels()
 
-    val adsViewModel: AdsViewModel by viewModels()
+    private val adsViewModel: AdsViewModel by viewModels()
 
     lateinit var resProducts: Array<String>
 
@@ -75,13 +63,17 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         resProducts = resources.getStringArray(R.array.products)
-        storeViewModel.productsInResources.value = resProducts
 
         lifecycle.addObserver(billingClientLifecycle)
 
         billingClientLifecycle.purchaseUpdateEvent.observe(this, {
-            Log.d("my_log_", "Purchases: ${it}")
             storeViewModel.purchases.postValue(it)
+
+            for (purchase in it) {
+                if (resProducts.contains(purchase.sku)) {
+                    adsViewModel.disableAds()
+                }
+            }
         })
 
         billingClientLifecycle.skus.observe(this, {
@@ -92,22 +84,7 @@ class MainActivity : AppCompatActivity() {
             it?.let { billingClientLifecycle.launchBillingFlow(this, it) }
         })
 
-        val adsLifecycle = AdsLifecycle(this, findViewById(R.id.bannerContainer))
-        lifecycle.addObserver(adsLifecycle)
-
-        adsViewModel.loadInterstitialEvent.observe( this, {
-            if (it) adsLifecycle.loadInterstitialAd()
-        })
-
-        adsViewModel.showInterstitialEvent.observe(this, { it ->
-            if (it) adsLifecycle.showInterstitialId()
-        })
-
-        adsViewModel.showBannerEvent.observe(this, {
-            if (it) adsLifecycle.showBanner()
-        })
-
-        adsViewModel.emitShowBannerEvent()
+        adsInit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -132,8 +109,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    private fun adsInit() {
+        val adsLifecycle = AdsLifecycle(this, findViewById(R.id.bannerContainer))
+        lifecycle.addObserver(adsLifecycle)
+
+        adsViewModel.loadInterstitialEvent.observe( this, {
+            if (it) adsLifecycle.loadInterstitialAd()
+        })
+
+        adsViewModel.showInterstitialEvent.observe(this, {
+            if (it) adsLifecycle.showInterstitialId()
+        })
+
+        adsViewModel.showBannerEvent.observe(this, {
+            if (it) adsLifecycle.showBanner()
+        })
+
+        adsViewModel.emitShowBannerEvent()
     }
 
 }

@@ -112,7 +112,6 @@ class BillingClientLifecycle constructor(
         processPurchases(result.purchasesList)
     }
 
-
     override fun onPurchasesUpdated(
         billingResult: BillingResult,
         purchases: MutableList<Purchase>?

@@ -17,51 +17,15 @@ class StoreViewModel @Inject constructor() : ViewModel() {
 
     var purchases: MutableLiveData<List<Purchase>> = MutableLiveData(ArrayList())
 
-    var noAdsPurchased: MutableLiveData<Boolean> = MutableLiveData(false)
-
     var purchasedAreLoaded: MutableLiveData<Boolean> = MutableLiveData(false)
-
-    var productsInResources: MutableLiveData<Array<String>> = MutableLiveData(null)
 
     val buyEvent = SingleLiveEvent<BillingFlowParams>()
 
     init {
         purchases.observeForever {
             purchasedAreLoaded.value = true
-
-//            if (isProductAvailable(it)) {
-//                noAdsPurchased.value = true
-//            }
-
             products.value?.let { products -> setProducts(products) }
         }
-    }
-
-    private fun isProductAvailable(purchases: List<Purchase>?): Boolean {
-        if (productsInResources.value.isNullOrEmpty()) {
-            return false
-        }
-
-        if (purchases.isNullOrEmpty()) {
-            return false
-        }
-
-        for (purchase in purchases) {
-            if (productsInResources.value?.contains(purchase.sku) == true) {
-                return true
-            }
-        }
-
-        return false
-    }
-
-    fun addPurchases(purchasesToAdd: List<Purchase>?) {
-        val newPurchases = arrayListOf<Purchase>()
-
-        purchasesToAdd?.let { newPurchases.addAll(it) }
-        purchases.value?.let { newPurchases.addAll(it) }
-
-        purchases.value = newPurchases
     }
 
     fun setProducts(productsToSet: List<StoreProduct>) {

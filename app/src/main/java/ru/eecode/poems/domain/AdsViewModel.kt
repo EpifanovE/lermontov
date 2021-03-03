@@ -1,6 +1,6 @@
 package ru.eecode.poems.domain
 
-import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ru.eecode.poems.ui.SingleLiveEvent
@@ -16,6 +16,8 @@ class AdsViewModel @Inject constructor(
     val showInterstitialEvent = SingleLiveEvent<Boolean>()
 
     val showBannerEvent = SingleLiveEvent<Boolean>()
+
+    private val adsIsDisabled = MutableLiveData(false)
 
     var count: Int = 0
 
@@ -46,8 +48,16 @@ class AdsViewModel @Inject constructor(
         }
     }
 
+    fun disableAds() {
+        adsIsDisabled.postValue(true)
+    }
+
     private fun isAdsActive(): Boolean {
         if (config.isPaidVersion) {
+            return false
+        }
+
+        if (adsIsDisabled.value == true || adsIsDisabled.value == null) {
             return false
         }
 
