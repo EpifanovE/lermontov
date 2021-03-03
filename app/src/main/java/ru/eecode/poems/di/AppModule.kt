@@ -9,6 +9,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ru.eecode.poems.R
+import ru.eecode.poems.domain.StoreViewModelConfig
 import ru.eecode.poems.repository.ArticleRepository
 import ru.eecode.poems.repository.db.articles.ArticleDao
 import ru.eecode.poems.repository.db.AppDatabase
@@ -60,5 +61,13 @@ object AppModule {
         val skuList = ArrayList<String>()
         skuList.addAll(appContext.resources.getStringArray(R.array.products))
         return BillingClientLifecycle(appContext as Application, skuList)
+    }
+
+    @Provides
+    fun provideStoreViewModelConfig(@ApplicationContext appContext: Context): StoreViewModelConfig {
+        return StoreViewModelConfig(
+            appContext.resources.getInteger(R.integer.interstitialNumber),
+            appContext.resources.getBoolean(R.bool.isPaidVersion)
+        )
     }
 }

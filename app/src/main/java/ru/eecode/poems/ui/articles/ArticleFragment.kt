@@ -51,7 +51,7 @@ class ArticleFragment : Fragment() {
 
         viewModel.articleId.value = arguments?.getInt("articleId")
 
-        adsViewModel.loadEvent.postValue(true)
+        adsViewModel.emitLoadInterstitialEvent()
     }
 
     override fun onDestroyView() {

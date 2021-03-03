@@ -118,7 +118,7 @@ class ArticlesIndexFragment : Fragment() {
             adapter?.submitList(it)
         })
 
-        adsViewModel.showEvent.postValue(true)
+        adsViewModel.emitShowInterstitialEvent()
     }
 
     override fun onDestroyView() {

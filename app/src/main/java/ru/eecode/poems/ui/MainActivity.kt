@@ -34,6 +34,7 @@ import ru.eecode.poems.R
 import ru.eecode.poems.domain.AdsViewModel
 import ru.eecode.poems.domain.StoreViewModel
 import ru.eecode.poems.domain.store.StoreProduct
+import ru.eecode.poems.ui.observers.AdsLifecycle
 import ru.eecode.poems.ui.observers.BillingClientLifecycle
 import javax.inject.Inject
 
@@ -52,10 +53,6 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var billingClientLifecycle: BillingClientLifecycle
-
-//    private val interstitialCountKey: String = "interstitial_count"
-
-//    lateinit var prefs: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,21 +92,22 @@ class MainActivity : AppCompatActivity() {
             it?.let { billingClientLifecycle.launchBillingFlow(this, it) }
         })
 
-//        prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val adsLifecycle = AdsLifecycle(this, findViewById(R.id.bannerContainer))
+        lifecycle.addObserver(adsLifecycle)
 
-        MobileAds.initialize(this) {}
-
-        val interstitialAd = InterstitialAd(applicationContext)
-        interstitialAd.adUnitId = getString(R.string.interstitialAdId)
-        val adRequest = AdRequest.Builder().build()
-
-        adsViewModel.loadEvent.observe( this, {
-            interstitialAd.loadAd(adRequest)
+        adsViewModel.loadInterstitialEvent.observe( this, {
+            if (it) adsLifecycle.loadInterstitialAd()
         })
 
-        adsViewModel.showEvent.observe(this, {
-            interstitialAd.let { if (it.isLoaded) it.show() }
+        adsViewModel.showInterstitialEvent.observe(this, { it ->
+            if (it) adsLifecycle.showInterstitialId()
         })
+
+        adsViewModel.showBannerEvent.observe(this, {
+            if (it) adsLifecycle.showBanner()
+        })
+
+        adsViewModel.emitShowBannerEvent()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
