@@ -25,6 +25,7 @@ import ru.eecode.poems.domain.StoreViewModel
 import ru.eecode.poems.domain.store.StoreProduct
 import ru.eecode.poems.ui.observers.AdsLifecycle
 import ru.eecode.poems.ui.observers.BillingClientLifecycle
+import ru.eecode.poems.utils.storeImageFinder
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -84,8 +85,14 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        billingClientLifecycle.skus.observe(this, {
-            storeViewModel.products.postValue(it.map { item -> StoreProduct(item) })
+        billingClientLifecycle.skus.observe(this, { it ->
+            storeViewModel.products.postValue(it.map { item ->
+                StoreProduct(item).let {
+                    it.title = resources.getString(R.string.store_item_title)
+                    it.image = storeImageFinder(this, it.skuDetails.sku)
+                    it
+                }
+            })
         })
 
         storeViewModel.buyEvent.observe(this, {

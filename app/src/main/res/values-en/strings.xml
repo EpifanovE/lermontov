@@ -1,6 +1,6 @@
 <resources>
-    <string name="nav_header_title">@string/app_name</string>
-    <string name="nav_header_subtitle">eevcode@gmail.com</string>
+    <string name="nav_header_title">Lermontov M.Y.</string>
+    <string name="nav_header_subtitle">poems</string>
 
     <string name="favorites">Favorites</string>
     <string name="settings">Settings</string>
@@ -31,7 +31,9 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
-    <string name="store_text">Давно выяснено, что при оценке дизайна и композиции читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому.</string>
+    <string name="store_text">We are constantly working on the development of the application. You can support the project by purchasing one of the options to disable ads.</string>
     <string name="thanks_for_purchase">Thank you for your purchase!</string>
+
+    <string name="store_item_title">Disable ads</string>
 
 </resources>

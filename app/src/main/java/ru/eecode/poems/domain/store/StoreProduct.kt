@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import com.android.billingclient.api.SkuDetails
 
 class StoreProduct constructor(var skuDetails: SkuDetails) {
+    var title: String? = null
     var isPurchased: Boolean = false
     var image: Drawable? = null
 }

@@ -53,7 +53,7 @@ class ProductAdapter @Inject constructor() : RecyclerView.Adapter<ProductAdapter
         private val imageView: ImageView = itemView.findViewById(R.id.productImage)
 
         fun bindTo(product: StoreProduct) {
-            titleView.text = product.skuDetails.title
+            titleView.text = product.title ?: product.skuDetails.title
             descriptionView.text = product.skuDetails.description
             priceView.text = product.skuDetails.price
 
