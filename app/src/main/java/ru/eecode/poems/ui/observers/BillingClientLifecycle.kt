@@ -67,7 +67,7 @@ class BillingClientLifecycle constructor(
         // TODO: Try connecting again with exponential backoff.
     }
 
-    fun querySkuDetails() {
+    private fun querySkuDetails() {
         val params = SkuDetailsParams.newBuilder()
             .setType(BillingClient.SkuType.INAPP)
             .setSkusList(listOfSkus)

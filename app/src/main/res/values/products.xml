@@ -2,6 +2,7 @@
 <resources>
     <string-array name="products">
         <item>lermontov_test_1</item>
+        <item>lermontov_test_2</item>
         <item>lermontov_ads_1</item>
     </string-array>
 

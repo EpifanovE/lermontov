@@ -49,6 +49,10 @@ class AdsLifecycle constructor(
         interstitialAd.loadAd(adRequest)
     }
 
+    fun hideBanner() {
+        adViewContainer.removeAllViews()
+    }
+
     private val adSize: AdSize
         get() {
             val display = activity.windowManager.defaultDisplay

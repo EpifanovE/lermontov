@@ -1,6 +1,7 @@
 package ru.eecode.poems.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 
@@ -66,12 +67,19 @@ class MainActivity : AppCompatActivity() {
 
         lifecycle.addObserver(billingClientLifecycle)
 
+        val adsLifecycle = AdsLifecycle(this, findViewById(R.id.bannerContainer))
+        lifecycle.addObserver(adsLifecycle)
+
         billingClientLifecycle.purchaseUpdateEvent.observe(this, {
+            Log.d("my_log_", "Purchases: ${it}")
             storeViewModel.purchases.postValue(it)
 
             for (purchase in it) {
                 if (resProducts.contains(purchase.sku)) {
                     adsViewModel.disableAds()
+                    break
+                } else {
+                    adsViewModel.emitShowBannerEvent()
                 }
             }
         })
@@ -84,7 +92,18 @@ class MainActivity : AppCompatActivity() {
             it?.let { billingClientLifecycle.launchBillingFlow(this, it) }
         })
 
-        adsInit()
+
+        adsViewModel.loadInterstitialEvent.observe( this, {
+            if (it) adsLifecycle.loadInterstitialAd()
+        })
+
+        adsViewModel.showInterstitialEvent.observe(this, {
+            if (it) adsLifecycle.showInterstitialId()
+        })
+
+        adsViewModel.showBannerEvent.observe(this, {
+            if (it) adsLifecycle.showBanner() else adsLifecycle.hideBanner()
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -107,25 +126,6 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    private fun adsInit() {
-        val adsLifecycle = AdsLifecycle(this, findViewById(R.id.bannerContainer))
-        lifecycle.addObserver(adsLifecycle)
-
-        adsViewModel.loadInterstitialEvent.observe( this, {
-            if (it) adsLifecycle.loadInterstitialAd()
-        })
-
-        adsViewModel.showInterstitialEvent.observe(this, {
-            if (it) adsLifecycle.showInterstitialId()
-        })
-
-        adsViewModel.showBannerEvent.observe(this, {
-            if (it) adsLifecycle.showBanner()
-        })
-
-        adsViewModel.emitShowBannerEvent()
     }
 
 }

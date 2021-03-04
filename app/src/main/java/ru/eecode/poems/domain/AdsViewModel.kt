@@ -50,6 +50,7 @@ class AdsViewModel @Inject constructor(
 
     fun disableAds() {
         adsIsDisabled.postValue(true)
+        showBannerEvent.postValue(false)
     }
 
     private fun isAdsActive(): Boolean {
