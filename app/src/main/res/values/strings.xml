@@ -1,6 +1,6 @@
 <resources>
     <string name="nav_header_title">Лермонтов М.Ю.</string>
-    <string name="nav_header_subtitle">сборник стихотворений</string>
+    <string name="nav_header_subtitle">Стихи</string>
 
     <string name="favorites">Избранное</string>
     <string name="settings">Настройки</string>
@@ -11,6 +11,7 @@
     <string name="menu_favorites">@string/favorites</string>
     <string name="menu_settings">@string/settings</string>
     <string name="menu_store">Отключить рекламу</string>
+    <string name="menu_about">О приложении</string>
 
     <string name="action_settings">@string/settings</string>
     <string name="action_add_to_favorites">В избранное</string>
@@ -35,5 +36,8 @@
     <string name="thanks_for_purchase">Спасибо за оплату!</string>
 
     <string name="store_item_title">Отключить рекламу</string>
+
+    <string name="author">Епифанов Е.В.</string>
+    <string name="authorEmail">eevcode@gmail.com</string>
 
 </resources>

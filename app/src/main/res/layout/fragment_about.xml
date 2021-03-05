@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/contentStart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_begin="15dp"
+        android:orientation="vertical"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/contentEnd"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_end="15dp"
+        android:orientation="vertical"
+        />
+
+    <TextView
+        android:id="@+id/aboutTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/aboutSubTitle"
+        app:layout_constraintStart_toEndOf="@id/contentStart"
+        app:layout_constraintEnd_toStartOf="@id/contentEnd"
+        android:textSize="18sp"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:text="@string/nav_header_title"/>
+
+    <TextView
+        android:id="@+id/aboutSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/aboutTitle"
+        app:layout_constraintBottom_toTopOf="@+id/aboutVersion"
+        app:layout_constraintStart_toEndOf="@id/contentStart"
+        app:layout_constraintEnd_toStartOf="@id/contentEnd"
+        android:textSize="16sp"
+        android:text="@string/nav_header_subtitle"/>
+
+    <TextView
+        android:id="@+id/aboutVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/aboutSubTitle"
+        app:layout_constraintBottom_toTopOf="@+id/aboutAuthor"
+        app:layout_constraintStart_toEndOf="@id/contentStart"
+        app:layout_constraintEnd_toStartOf="@id/contentEnd"
+        android:layout_marginBottom="20dp"
+        android:textSize="16sp"
+        android:text="@string/versionName"/>
+
+    <TextView
+        android:id="@+id/aboutAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/aboutVersion"
+        app:layout_constraintBottom_toTopOf="@+id/aboutEmail"
+        app:layout_constraintStart_toEndOf="@id/contentStart"
+        app:layout_constraintEnd_toStartOf="@id/contentEnd"
+        android:textSize="16sp"
+        android:text="@string/author"/>
+
+    <TextView
+        android:id="@+id/aboutEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/aboutAuthor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/contentStart"
+        app:layout_constraintEnd_toStartOf="@id/contentEnd"
+        android:autoLink="email"
+        android:textSize="16sp"
+        android:text="@string/authorEmail"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
