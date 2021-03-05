@@ -8,6 +8,9 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import androidx.drawerlayout.widget.DrawerLayout
 
 import androidx.navigation.NavController
@@ -63,6 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        navView.itemIconTintList = null
 
         resProducts = resources.getStringArray(R.array.products)
 
@@ -72,7 +76,6 @@ class MainActivity : AppCompatActivity() {
         lifecycle.addObserver(adsLifecycle)
 
         billingClientLifecycle.purchaseUpdateEvent.observe(this, {
-            Log.d("my_log_", "Purchases: ${it}")
             storeViewModel.purchases.postValue(it)
 
             for (purchase in it) {
@@ -117,6 +120,7 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.main, menu);
         val settingsItem: MenuItem = menu.findItem(R.id.action_settings)
         settingsItem.isVisible = navController.currentDestination?.id != R.id.nav_settings
+
         return true;
     }
 

@@ -34,4 +34,6 @@
     <color name="cardHeaderColor">#000000</color>
     <color name="cardBodyColor">#222222</color>
     <color name="cardStrokeColor">#333333</color>
+
+    <color name="storeItemColor">#f39c12</color>
 </resources>
