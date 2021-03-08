@@ -8,6 +8,8 @@ apply plugin: 'dagger.hilt.android.plugin'
 
 apply plugin: 'com.google.gms.google-services'
 
+apply plugin: 'com.google.firebase.crashlytics'
+
 final VERSION_NAME = '1.0'
 final VERSION_CODE = 1
 
@@ -135,6 +137,7 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:26.5.0')
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     // Memory leak detection
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
