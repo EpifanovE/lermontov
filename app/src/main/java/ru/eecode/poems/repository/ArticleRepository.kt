@@ -30,7 +30,7 @@ class ArticleRepository @Inject constructor(
 
     suspend fun articlesSeed() {
         val gson = Gson()
-        val listType = object : TypeToken<List<Article?>?>() {}.type
+        val listType = object : TypeToken<List<Article>>() {}.type
         val json: String? = jsonAssetsLoader.load("database/articles.json")
         val articlesList: List<Article> = gson.fromJson(json, listType)
 
