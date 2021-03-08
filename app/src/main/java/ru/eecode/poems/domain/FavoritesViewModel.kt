@@ -8,7 +8,7 @@ import androidx.paging.toLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.eecode.poems.repository.ArticleRepository
-import ru.eecode.poems.repository.db.articles.ArticleListItem
+import ru.eecode.poems.db.model.ArticleListItem
 import javax.inject.Inject
 
 @HiltViewModel

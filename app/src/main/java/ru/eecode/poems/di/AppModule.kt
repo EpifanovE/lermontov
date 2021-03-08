@@ -2,7 +2,6 @@ package ru.eecode.poems.di
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.Module
 import dagger.Provides
@@ -12,11 +11,9 @@ import dagger.hilt.components.SingletonComponent
 import ru.eecode.poems.R
 import ru.eecode.poems.domain.StoreViewModelConfig
 import ru.eecode.poems.repository.ArticleRepository
-import ru.eecode.poems.repository.db.articles.ArticleDao
-import ru.eecode.poems.repository.db.AppDatabase
-import ru.eecode.poems.repository.db.DbCallback
-import ru.eecode.poems.repository.db.articles.ArticlesSeeder
-import ru.eecode.poems.repository.db.favorites.FavoriteDao
+import ru.eecode.poems.db.dao.ArticleDao
+import ru.eecode.poems.db.AppDatabase
+import ru.eecode.poems.db.dao.FavoriteDao
 import ru.eecode.poems.ui.observers.BillingClientLifecycle
 import ru.eecode.poems.utils.JsonAssetsLoader
 import javax.inject.Singleton
@@ -27,12 +24,6 @@ object AppModule {
 
     @Provides
     fun provideJsonAssetsLoader(@ApplicationContext context: Context): JsonAssetsLoader = JsonAssetsLoader(context)
-
-    @Provides
-    fun provideArticlesSeeder(jsonAssetsLoader: JsonAssetsLoader): ArticlesSeeder = ArticlesSeeder(jsonAssetsLoader)
-
-    @Provides
-    fun provideDbCallback(articlesSeeder: ArticlesSeeder) = DbCallback(articlesSeeder)
 
     @Singleton
     @Provides

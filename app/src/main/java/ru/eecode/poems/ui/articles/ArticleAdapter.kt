@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import ru.eecode.poems.R
-import ru.eecode.poems.repository.db.articles.ArticleListItem
+import ru.eecode.poems.db.model.ArticleListItem
 import javax.inject.Inject
 
 class ArticleAdapter @Inject constructor() :

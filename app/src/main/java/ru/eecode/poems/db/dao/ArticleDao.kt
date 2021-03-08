@@ -1,7 +1,9 @@
-package ru.eecode.poems.repository.db.articles
+package ru.eecode.poems.db.dao
 
 import androidx.paging.DataSource
 import androidx.room.*
+import ru.eecode.poems.db.model.Article
+import ru.eecode.poems.db.model.ArticleListItem
 
 @Dao
 interface ArticleDao {
