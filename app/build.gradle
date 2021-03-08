@@ -136,8 +136,8 @@ dependencies {
     implementation "com.android.billingclient:billing:$billing_version"
 
     implementation platform('com.google.firebase:firebase-bom:26.5.0')
-    implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
     // Memory leak detection
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
