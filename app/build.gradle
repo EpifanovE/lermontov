@@ -43,7 +43,7 @@ android {
 
     buildTypes {
         debug {
-//            applicationIdSuffix ".debug"
+            applicationIdSuffix ".debug"
             debuggable true
             resValue("string", "bannerAdId", "ca-app-pub-3940256099942544/6300978111")
             resValue("string", "interstitialAdId", "ca-app-pub-3940256099942544/1033173712")
