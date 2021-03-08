@@ -7,8 +7,7 @@ import java.nio.charset.Charset
 
 class JsonAssetsLoader(private val context: Context) {
     fun load(path: String): String? {
-        val json: String?
-        json = try {
+        return try {
             val inputStream: InputStream = context.assets.open(path)
             val size = inputStream.available()
             val buffer = ByteArray(size)
@@ -19,6 +18,5 @@ class JsonAssetsLoader(private val context: Context) {
             ex.printStackTrace()
             return null
         }
-        return json
     }
 }

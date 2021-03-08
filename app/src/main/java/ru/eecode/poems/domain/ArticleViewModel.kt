@@ -4,8 +4,8 @@ import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.eecode.poems.repository.ArticleRepository
-import ru.eecode.poems.repository.db.articles.Article
-import ru.eecode.poems.repository.db.favorites.Favorite
+import ru.eecode.poems.db.model.Article
+import ru.eecode.poems.db.model.Favorite
 import javax.inject.Inject
 
 @HiltViewModel

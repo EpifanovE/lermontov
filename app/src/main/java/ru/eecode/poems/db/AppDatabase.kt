@@ -1,12 +1,14 @@
-package ru.eecode.poems.repository.db
+package ru.eecode.poems.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import ru.eecode.poems.repository.db.articles.*
-import ru.eecode.poems.repository.db.favorites.Favorite
-import ru.eecode.poems.repository.db.favorites.FavoriteDao
+import ru.eecode.poems.db.dao.ArticleDao
+import ru.eecode.poems.db.model.Favorite
+import ru.eecode.poems.db.dao.FavoriteDao
+import ru.eecode.poems.db.model.Article
+import ru.eecode.poems.db.model.ArticleFts
 
 @Database(entities = [Article::class, ArticleFts::class, Favorite::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {

@@ -1,4 +1,4 @@
-package ru.eecode.poems.repository.db.articles
+package ru.eecode.poems.db.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

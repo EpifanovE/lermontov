@@ -3,16 +3,13 @@ package ru.eecode.poems.ui.articles
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.EditText
-import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +18,7 @@ import ru.eecode.poems.R
 import ru.eecode.poems.databinding.FragmentArticlesIndexBinding
 import ru.eecode.poems.domain.AdsViewModel
 import ru.eecode.poems.domain.ArticleIndexViewModel
-import ru.eecode.poems.repository.db.articles.ArticleListItem
+import ru.eecode.poems.db.model.ArticleListItem
 import ru.eecode.poems.utils.hideKeyboard
 
 

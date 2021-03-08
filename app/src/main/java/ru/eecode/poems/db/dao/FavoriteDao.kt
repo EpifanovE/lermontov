@@ -1,9 +1,10 @@
-package ru.eecode.poems.repository.db.favorites
+package ru.eecode.poems.db.dao
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.*
-import ru.eecode.poems.repository.db.articles.ArticleListItem
+import ru.eecode.poems.db.model.Favorite
+import ru.eecode.poems.db.model.ArticleListItem
 
 @Dao
 interface FavoriteDao {

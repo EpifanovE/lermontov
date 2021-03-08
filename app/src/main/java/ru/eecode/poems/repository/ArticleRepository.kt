@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import ru.eecode.poems.repository.db.articles.Article
-import ru.eecode.poems.repository.db.articles.ArticleDao
-import ru.eecode.poems.repository.db.articles.ArticleListItem
-import ru.eecode.poems.repository.db.favorites.Favorite
-import ru.eecode.poems.repository.db.favorites.FavoriteDao
+import ru.eecode.poems.db.model.Article
+import ru.eecode.poems.db.dao.ArticleDao
+import ru.eecode.poems.db.model.ArticleListItem
+import ru.eecode.poems.db.model.Favorite
+import ru.eecode.poems.db.dao.FavoriteDao
 import ru.eecode.poems.utils.JsonAssetsLoader
 import javax.inject.Inject
 
@@ -30,7 +30,7 @@ class ArticleRepository @Inject constructor(
 
     suspend fun articlesSeed() {
         val gson = Gson()
-        val listType = object : TypeToken<List<Article?>?>() {}.type
+        val listType = object : TypeToken<List<Article>>() {}.type
         val json: String? = jsonAssetsLoader.load("database/articles.json")
         val articlesList: List<Article> = gson.fromJson(json, listType)
 

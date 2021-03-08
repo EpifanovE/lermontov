@@ -11,10 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import ru.eecode.poems.R
-import ru.eecode.poems.databinding.FragmentArticlesIndexBinding
 import ru.eecode.poems.databinding.FragmentFavoritesBinding
 import ru.eecode.poems.domain.FavoritesViewModel
-import ru.eecode.poems.repository.db.articles.ArticleListItem
+import ru.eecode.poems.db.model.ArticleListItem
 import ru.eecode.poems.ui.articles.ArticleAdapter
 
 @AndroidEntryPoint

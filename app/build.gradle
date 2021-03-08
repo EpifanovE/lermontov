@@ -8,8 +8,10 @@ apply plugin: 'dagger.hilt.android.plugin'
 
 apply plugin: 'com.google.gms.google-services'
 
-final VERSION_NAME = '1.0.1'
-final VERSION_CODE = 2
+apply plugin: 'com.google.firebase.crashlytics'
+
+final VERSION_NAME = '1.0.2'
+final VERSION_CODE = 3
 
 android {
     compileSdkVersion 30
@@ -43,10 +45,12 @@ android {
 
     buildTypes {
         debug {
-//            applicationIdSuffix ".debug"
+            applicationIdSuffix ".debug"
             debuggable true
+//            minifyEnabled true
             resValue("string", "bannerAdId", "ca-app-pub-3940256099942544/6300978111")
             resValue("string", "interstitialAdId", "ca-app-pub-3940256099942544/1033173712")
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         release {
@@ -134,7 +138,8 @@ dependencies {
     implementation "com.android.billingclient:billing:$billing_version"
 
     implementation platform('com.google.firebase:firebase-bom:26.5.0')
-    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
     // Memory leak detection
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
