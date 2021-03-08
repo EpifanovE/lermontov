@@ -8,8 +8,8 @@ apply plugin: 'dagger.hilt.android.plugin'
 
 apply plugin: 'com.google.gms.google-services'
 
-final VERSION_NAME = '1.0'
-final VERSION_CODE = 1
+final VERSION_NAME = '1.0.1'
+final VERSION_CODE = 2
 
 android {
     compileSdkVersion 30

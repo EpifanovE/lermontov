@@ -6,16 +6,12 @@
         <item>lermontov_ads_3</item>
         <item>lermontov_ads_4</item>
         <item>lermontov_ads_5</item>
-        <item>lermontov_test_1</item>
-        <item>lermontov_test_2</item>
     </string-array>
 
     <integer-array name="product_images">
         <item>@drawable/store_1</item>
         <item>@drawable/store_2</item>
         <item>@drawable/store_3</item>
-        <item>@drawable/store_4</item>
-        <item>@drawable/store_5</item>
         <item>@drawable/store_4</item>
         <item>@drawable/store_5</item>
     </integer-array>
