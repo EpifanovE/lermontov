@@ -10,8 +10,8 @@ apply plugin: 'com.google.gms.google-services'
 
 apply plugin: 'com.google.firebase.crashlytics'
 
-final VERSION_NAME = '1.0.3'
-final VERSION_CODE = 4
+final VERSION_NAME = '1.0.4'
+final VERSION_CODE = 5
 
 android {
     compileSdkVersion 30
